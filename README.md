@@ -7,9 +7,9 @@ https://medium.com/@sushantgautam_930/simple-way-to-install-cassandra-in-windows
 
 Requirements:
 
-    python 3.x
+    python-3.x
 
-    cassandra 3.1.4
+    cassandra-3.11.4
 
 In windows
    
