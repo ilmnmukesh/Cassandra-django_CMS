@@ -1,0 +1,143 @@
+{% extends "home_mahal/base.html" %} {% load static%} {%block css%}
+<link rel="stylesheet" href="{% static 'css/banner.css'%}">
+<link rel="stylesheet" href="{% static 'css/home_customer.css'%}">
+<link rel="stylesheet" href="{% static 'css/home_catering.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+<link rel="stylesheet" href="{% static 'css/home_mahal.css'%}"> {%endblock css%} {% block js%}
+<script src="{% static 'js/pics.js'%}"></script>
+<script src="{% static 'js/back.js'%}"></script>
+<script src="{% static 'js/date.js'%}"></script>
+{%endblock js%}{% block body%} {%block nav%}
+<nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+    <a class="nav-link" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/static/image/dropdown_log.png" width="30" height="30" alt="">
+    </a>
+
+    <div class="dropdown-menu " aria-labelledby="dropdownId">
+        <div class="container">
+            <a href="{% url 'mahalviewcatering' id %}" class="dropdown-item"><i class='fas fa-plus mr-3'></i>Food Order</a>
+            <a href="{% url 'createcatboybymahal' id %}" class="dropdown-item"><i class='fas fa-plus mr-3'></i>S-Boys Order</a>
+        </div>
+
+
+        <hr>
+        <div class="container">
+            <br>
+            <a href="{% url 'homemahal' id %}" class="dropdown-item"><i class='fas fa-home mr-3'></i>Home</a>
+            <a href="{% url 'mahalgallery' id %}" class="dropdown-item"><i class='fas fa-plus mr-3'></i>Add Photo</a>
+            <a href="{% url 'mahalcalendar' id %}" class="dropdown-item"><i class='fas fa-calendar-check mr-3'></i>Calendar&Rent</a>
+            <a href="{% url 'viewmahalorder' id %}" class="dropdown-item"><i class='fas fa-cart-plus mr-3'></i>View Orders</a>
+            <a href="{% url 'mahalhistory' id %}" class="dropdown-item"><i class='fas fa-history mr-3'></i>History</a>
+            <a href="{% url 'mahalearning' id %}" class="dropdown-item"><i class='fas fa-rupee-sign mr-3'></i>Earnings</a>
+            <hr>
+
+            <a href="{% url 'logout' id %}" class="dropdown-item"> <i class='fas fa-sign-out-alt'></i> Logout</a>
+        </div>
+
+    </div>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+            <li class="nav-item ml-5">
+
+                <img src='/static/image/logo_cat.png' height="40px" width="40px">
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link mr-5" href="{% url 'home' %}" style="color: -webkit-linear-gradient(blue,black) !important;">CATERING</a>
+            </li>
+
+
+
+
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <a class="mx-3" title="User Profile"><i class="fas fa-info-circle"></i></a>
+            <div class="btn-group">
+                <button class="btn " type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span><i class="fas fa-user rounded-circle border fa-2x overflow-hidden"></i></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+
+                    <div class="container1" style="text-align: center;">
+                        {% if prof_img|length %}
+                        <img class='logo my-3 rounded-circle' title="profile" src='{{prof_img}}' height="75px" width="75px" style="border-radius: 4px;"> {% else %}
+                        <span><i class="fas fa-user text-danger rounded-circle border border-danger fa-2x overflow-hidden"></i></span> {% endif %}
+
+                        <p>{{name}}</p>
+                        <p> {{ email }} </p>
+                        <a class="btn btn-primary btn-floating " href="{% url 'editmahal' id %}" role="button">edit profile</a>
+                        <hr>
+                        <a href='#'>
+                            <p style="text-decoration: none; font-size:small; color:black;"><i class='fas fa-user-plus'></i> Add another account</p>
+                        </a>
+                        <hr>
+                        <a name="" id="" class="btn btn-light" href="#" role="button"><i class="fas fa-sign-out"></i>logout</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</nav>
+
+{% block nav_body%} {% endblock nav_body %}
+
+<section id="footer" class="font-weight-bold">
+    <div class="container ">
+        <div class="row text-center text-xs-center text-sm-left text-md-left ">
+            <div class="col-xs-12 col-sm-4 col-md-4 ">
+                <h5>Quick links</h5>
+                <ul class="list-unstyled quick-links ">
+
+                    <li>
+                        <a href="{% url 'homemahal' id %} " class="dropdown-item "><i class='fas fa-home mr-3'></i>Home</a>
+
+                    </li>
+                    <li>
+                        <a href="{% url 'mahalgallery' id %} " class="dropdown-item "><i class='fas fa-plus mr-3'></i>Add Photo</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mahalcalendar' id %} " class="dropdown-item "><i class='fas fa-calendar-check mr-3'></i>Calendar&Rent</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'viewmahalorder' id %} " class="dropdown-item "><i class='fas fa-cart-plus mr-3'></i>View Orders</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'mahalhistory' id %} " class="dropdown-item "><i class='fas fa-history mr-3'></i>History</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'mahalearning' id %} " class="dropdown-item "><i class='fas fa-rupee-sign mr-3'></i>Earnings</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5 ">
+            <ul class="list-unstyled list-inline social text-center ">
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-user "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-copyright "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); " target="_blank "><i class="fa fa-envelope "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-users "></i></a></li>
+            </ul>
+        </div>
+        </hr>
+
+        <div class="row ">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white ">
+                <p class="h6 ">&copy All right Reversed.
+                    <a class="text-green ml-2 " href="https://www.sunlimetech.com " target="_blank "></a>
+                </p>
+            </div>
+            </hr>
+        </div>
+    </div>
+</section>
+
+{% endblock nav %} {% endblock body%}

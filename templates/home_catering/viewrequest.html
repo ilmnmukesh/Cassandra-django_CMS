@@ -1,0 +1,82 @@
+{% extends "./nav.html" %} {% block title %} Catering Service | Request {{rev.name}} {% endblock title %} {% block nav_body %}
+<div class="catering_service text-white bg bg-light " style="background-color: grey !important;">
+    <div class="border-bottom border-light mb-5">
+        <p class="display-3">Order List</p>
+    </div>
+    <div class="container bg-light text-dark row rounded">
+        <div class="col-6 my-5 row">
+            <p class="col-6">Name:</p>
+            <p class="col-6">{{rev.name}}</p>
+            <p class="col-6">Address:</p>
+            <p class="col-6">{{obj.address}}</p>
+            <p class="col-6">Contact:</p>
+
+            {% if rev.contact|length %}
+            <p class="col-6">{{rev.contact.0}}, {{rev.contact.1}}</p>
+            {% else %}
+            <p class="col-6">{{rev.ph_numb}}</p>
+            {% endif %}
+            <p class="col-6">Email:</p>
+            <p class="col-6">{{rev.email}}</p>
+        </div>
+        <div class="col-6  my-5 row">
+            <p class="col-8">FoodList:</p>
+            <p class="col-8 float-center">Veg:</p>
+            {% if obj.foodlist.veg|length %}
+            <p class="col-2">{{obj.foodlist.veg|list_to_string}},</p>
+            {% else %}
+            <p>Nil</p>{% endif %}
+            <p class="col-8 float-center">Non-Veg:</p>
+            {% if obj.foodlist.non_veg|length %} {% for val in obj.foodlist.non_veg %}
+            <p class="col-*">{{val}}</p>
+            {% endfor %} {% else %}
+            <p>Nil</p>{% endif %}
+        </div>
+        <div class="col-12 row border-top">
+            <p class="col-3 text-center my-3">Date: {{obj.date}} @ {{obj.reg_type}}</p>
+            <p class="col-3 text-center my-3">Plates:{{obj.plates}}</p>
+            <p class="col-3 text-center my-3">Rs: {{per}} per plate</p>
+            <p class="col-3 text-center my-3">Amount: Rs. {{obj.amount}}</p>
+        </div>
+        <div class="col-12 row  border-top text-center">
+
+            {% if obj.status == "pending" %}
+            <p class="col-4 my-3">
+                <a href="{% url 'cancelcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-danger col-3">Cancel</a>
+            </p>
+            <p class="col-4 my-3">
+                <a href="{% url 'viewcateringorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-4 my-3">
+                <a href="{% url 'acceptcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-success col-3">Accept</a>
+            </p>
+            {% elif obj.status == "cancel" %}
+            <p class="col-6 my-3">
+                <a href="{% url 'viewcateringorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-danger text-white col-4 disabled">Cancelled <i class="fas fa-times" aria-hidden="true"></i> </a>
+            </p>
+            {% elif obj.status == "complete" %}
+            <p class="col-6 my-3">
+                <a href="{% url 'viewcateringorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-warning text-white col-4 disabled">Completed <i class="fas fa-check-double" aria-hidden="true"></i> </a>
+            </p>
+            {% else %}
+            <p class="col-6 my-3">
+                <a href="{% url 'viewcateringorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-success col-4 disabled">Accepted <i class="fas fa-check" aria-hidden="true"></i> </a>
+            </p>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock nav_body %}

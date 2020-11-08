@@ -1,0 +1,90 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | Search {{search}} {% endblock title %} {% block nav_body%}
+<section class='banner'>
+    <div class="bgg">
+        <img src="/static/image/cater_banner.jpg">
+    </div>
+
+    <div class='content'>
+        <h2 class='heading'>Your Search <span>'{{search}}' </span> Found almost <span>{{picture|length}}</span></h2><br><br>
+    </div>
+</section>
+{% if empty %} {% for obj in picture %}
+<!-- <div class="row" style="width:1500px;">
+    <div class="card  bg bg-dark col-md-3 mx-5 text-info" style=" color:yellowgreen">
+        <div class="card-body">
+            <div class="border-bottom border-info row">
+                <div class="col-sm-6 font-weight-bold text-info">
+                    <h4 class="card-title ">{{obj.name}}</h4>
+                    <p class="card-text card-title text-danger">Rs.{{obj.amount}} </p>
+                    <p class='card-text'> {{obj.date}}</p>
+                    <p class='card-text text-danger'>{{obj.time}}</p>
+                </div>
+
+                <div class="col-sm-6 float-right my-2" style='height:120px; width:80px; overflow:hidden;'>
+                    {% if obj.pic != '' %}
+                    <img class="card-img img-thumbnails" src="{{obj.pic}}" alt="prof"> {% else %}
+                    <img class="card-img img-fluid" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-12 text-left text-info font-weight-bold mt-3">
+                <p class="card-title">Location: {{obj.venue.location}}</p>
+                <p class="card-text small ">Address: {{obj.venue.address}}</p>
+                <p class="card-text small">Contact: {{obj.venue.phone}}, {{obj.venue.mobile}}</p>
+
+            </div>
+            {% if obj.msg is defined %}
+            <div class="" style="border-bottom: 2px solid yellowgreen;">
+                <a href="{% url 'orderrequest' id obj.oid obj.date %}" class="text-center bg bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                Request</a></div> {% endif %}
+            <p class="card-text small text-center text-warning">{{obj.msg}}</p>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+        <div class="row no-gutters">
+            <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                {% if obj.pic != '' %}
+                <img class="card-img rounded" src="{{obj.pic}}" alt="prof"> {% else %}
+                <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+            </div>
+            <div class="col-md-7">
+                <div class="row mt-4  font-weight-bold">
+
+                    <p class="card-title ml-3 col-5 text-center text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+                    <p class='card-text text-success col-5'><span class="text-light">Date: </span>{{obj.date}}
+                        <span class="text-light">@</span><span class="text-danger">{{obj.time}}</span></p>
+
+                    <p class="card-text ml-3 text-success text-center card-title col-5"><span class="text-light">Amount: </span>Rs.{{obj.amount}} </p>
+                    <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Location: </span>{{obj.venue.location}}</p>
+
+                    <p class="card-title mt-2 col-5 text-center mx-3 text-success"><span class="text-light">Phone: </span>{{obj.venue.phone}}</p>
+                    <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.venue.mobile}}</p>
+
+                    <p class="card-text col-11 text-center text-info"><span class="text-light">Address:  </span> {{obj.venue.address}}</p>
+
+                    {% if obj.msg is defined %}
+                    <div class="col-1">
+
+                    </div>
+                    <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                        <a href="{% url 'searchorderrequest' id obj.oid obj.date %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                        Request</a></div> {% endif %}
+                    <p class="mx-5 card-text col-10 text-center text-warning">{{obj.msg}}</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endfor %}{% else %}
+<div class="banner" style="height:360px">
+    <h6 class="display-1">No results Found</h6>
+</div>
+{% endif %}
+<div class=" text-center container">
+    <a href="{% url 'homecatboy' id %}" class="btn btn-danger border-0 float-center col-4">Back</a>
+</div>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'home_catering/nav.html' %} {% block title %} Catering Service | Home {% endblock title %} {% block nav_body %}
+<section class='banner1'>
+    <div class="bgg">
+        <img src="/static/image/cater_banner.jpg">
+    </div>
+
+    <div class='content'>
+        <h2 class='heading'>You <span>don't need a Sliver spoon </span> to Eat Good Food</h2><br><br>
+    </div>
+</section>
+<section class='notify catering_service font-weight-bold text-warning'>
+    <h2>
+        <i class='fas fa-bell'></i>notify
+    </h2>
+    {% if current_catering|length or current_request|length %} {% if current_catering|length %}
+    <table class="mb-5 catering_service table text-light font-weight-bold table-striped">
+
+
+        <thead>
+            <tr class="text-center">
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Timing</th>
+                <th>Amount</th>
+                <th>Remaining Count</th>
+                <th>View</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for obj in current_catering %}
+            <tr class="text-center">
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.time}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.catboy_max}} / {{obj.count}}</td>
+                {% if obj.count_empty %}
+                <td>
+                    <a class="btn btn-light text-danger font-weight-bold" href="{% url 'viewcatboyrequestbycatering' id obj.id %}">View</a>
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-dark text-white font-weight-bold" href="{% url 'viewcatboyrequestbycatering' id obj.id %}">Accept Request</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% endif %} {% if current_request|length %}
+    <table class="mb-5 catering_service table text-light font-weight-bold table-striped">
+        <thead>
+            <tr class="text-center text-light">
+
+                <th>Date@time</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>No of Plates</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in current_request %}
+            <tr>
+                <th>{{obj.date}}@ {{obj.reg_type}}</th>
+                <th>{{obj.address}}</th>
+                <th>Rs. {{obj.amount}}</th>
+                <th>{{obj.plates}}</th>
+                {% if obj.status == "pending" %}
+                <th>
+                    <a href="{% url 'viewcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-info">View Order</a>
+                </th>
+                {% elif obj.status == "cancel" %}
+                <th>
+                    <a href="{% url 'viewcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-danger">
+                        View Order <i class="fas fa-times "></i>
+                    </a>
+                </th>
+                {% elif obj.status == "complete" %}
+                <th>
+                    <a href="{% url 'viewcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-success">
+                        View Order<i class="fas fa-check-double" aria-hidden="true"></i>
+                    </a>
+                </th>
+                {% else %}
+                <th>
+                    <a href="{% url 'viewcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-success">
+                        View Order<i class="fas fa-check" aria-hidden="true"></i>
+                    </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+    {% endif %} {% else %}
+    <table class="mb-5 catering_service table text-light font-weight-bold table-striped">
+        <tbody>
+            <tr rowspan="2">
+                <td colspan="6">No Notifications</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+
+
+    <div class="border-top border-white my-5">
+        <h2 class="heading text-warning">
+            Service Boys
+        </h2>
+        <p class="text">
+            Find the best service boys near You!!
+        </p>
+        <form class="form-inline mx-4" action="{% url 'searchcatboybycatering' id %}" method="POST">
+            {% csrf_token %}
+            <input class="form-control col-3 mr-sm-2" type="search" name='q' placeholder="Catering Boy Name" aria-label="Search">
+            <button class="btn btn-dark font-weight-bold text-white my-2 my-sm-0" type="submit"> Search</button>
+        </form>
+        {% for obj in list_catboy%}
+        <div class="container">
+            <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-5 float-right my-4 " style='height:200px; width:330px; overflow:hidden;'>
+                        {% if obj.prof_img != '' %}
+                        <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                        <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                    </div>
+                    <div class="col-md-7 my-5">
+                        <div class="row mt-4  font-weight-bold">
+
+                            <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+
+                            <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                            <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.ph_numb}}</p>
+
+                            <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class=" text-center container col-4 font-weight-bold">
+            <a href="{% url 'viewcatboybycatering' id %}" class="btn btn-light col-8 font-weight-bold float-center" style="color: yellowgreen;border: 2px solid yellowgreen;"> More Boys Details</a>
+        </div>
+    </div>
+
+</section>
+
+{% endblock nav_body %}

@@ -1,0 +1,79 @@
+{% extends "home_customer/nav.html" %} {% block title %}Customer| Booking Mahal {% endblock title %} {% block nav_body %}
+
+
+<div class="container-fluid catering_service rounded">
+
+    <div class="container">
+        <p class="display-3 text-light border-bottom border-light">Book Mahal Service</p>
+    </div>
+
+
+    <script>
+        function change() {
+            document.getElementById('to').value = document.getElementById('from').value;
+        }
+    </script>
+
+    <form action="{% url 'bookmahalbycustomer' id cid %}" method="POST">
+        {% csrf_token %}
+        <div class="container-fluid col-5 my-5">
+            <div class="input-group ny-3">
+                <label class="my-1 col-3">
+                    <span class="text-light my-5 mx-2"> From Date: </span>
+                 </label>
+                <div class="input-group-prepend">
+
+                    <span class="input-group-text rounded-left" id="my-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                </div>
+                <input id="from" class="form-control" onchange="change();" type="date" name="from" placeholder="From Date" aria-label="Recipient's " value="{{x|get_current_date}}" aria-describedby="my-addon" style="text-align: center;">
+            </div>
+            <div class="input-group my-3">
+                <label class="my-1 col-3">
+                    <span class="text-light my-5 mx-2"> To Date: </span>
+                 </label>
+                <div class="input-group-prepend rounded">
+
+                    <span class="input-group-text rounded-left" id="my-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                </div>
+                <input id="to" class="form-control " type="date" name="to" placeholder="To date" aria-label="Recipient's" aria-describedby="my-addon" value="{{x|get_current_date}}" style="text-align: center;">
+            </div>
+            <div class="input-group my-3">
+                <label class="my-1 col-3">
+                    <span class="text-light my-5 mx-2">Rent Hours </span>
+                 </label>
+                <div class="input-group-prepend rounded">
+
+                    <span class="input-group-text rounded-left" id="my-addon"><i class="fa fa-clock" aria-hidden="true"></i></span>
+                </div>
+                <input id="to" class="form-control" type="number" name="rent" value="6" placeholder="Rent Hours" aria-label="Recipient's" aria-describedby="my-addon" style="text-align: center;">
+            </div>
+            <div class="my-2  text-center">
+                <span class="text-warning font-weight-bold my-5 mx-2"> Amount Rs. {{amt}} per hour </span>
+            </div>
+            {% if book_btn %}
+            <div class="input-group my-3 justify-content-center">
+                <a class="form-control  font-weight-bold btn btn-success col-5 disabled">Book <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+            </div>
+
+            {% else %}
+            <div class="input-group my-3 justify-content-center">
+                <input class="form-control  font-weight-bold btn btn-success col-5 " type="submit" name="" value="Book">
+            </div>
+
+            {% endif %}
+
+
+            <p class="my-2 text-center">
+                <span class="text-danger font-weight-bold my-5 mx-2"> {{msg}} </span>
+            </p>
+
+            <div class="text-center justify-content-center">
+                <a href="{% url 'homecustomer' id %}" class="btn btn-light text-danger font-weight-bold">Home</a>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+{% endblock %}

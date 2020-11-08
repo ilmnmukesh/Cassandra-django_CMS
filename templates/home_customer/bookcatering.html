@@ -1,0 +1,483 @@
+{% extends "./nav.html" %} {% block title %}Customer| Booking Catering{% endblock title %} {% block nav_body %}
+<div class="catering_service">
+    <div class="container">
+        <p class="display-3 text-light ">Book Service</p>
+    </div>
+
+    <table class="notify mb-5 table font-weight-bold table-striped">
+        {% if mrng_veg|length %}
+        <thead>
+            <tr class="catering_service text-light font-weight-bold lead">
+                <td colspan="5">
+                    BreakFast
+                </td>
+            </tr>
+            <tr class="text-center">
+                <th>Sl. No.</th>
+                <th>Food Name</th>
+                <th>Count</th>
+                <th>Price Per Count</th>
+                <th>Add</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, val in mrng_veg.items %}
+            <tr class="bg-dark text-white">
+                <td>{{forloop.counter}}</td>
+                <td>{{key}}</td>
+                <td>{{val.1}}</td>
+                <td>Rs.{{val.0}}</td>
+                <td>{% if key in disabled.mrng %}
+                    <a class="btn btn-sm text-white btn-success col-6 disabled">
+                        Added <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                    <a href="{% url 'addtocartcustomer' id cid 'mrng' key val.0 val.1 'veg' %}" class="btn btn-sm text-white btn-warning col-6">
+                        Add to Cart <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>Veg</th>
+                <th colspan="2">Total Amount per Plate</th>
+                <th>Rs.{{mrng_veg_total}} per Plate</th>
+                <th></th>
+            </tr>
+
+
+        </tbody>
+        {% endif %} {% if lunch_veg|length or lunch_non|length %}
+        <thead>
+            <tr class="mahal_management text-light font-weight-bold lead">
+                <td colspan="5">
+                    Lunch
+                </td>
+            </tr>
+            <tr class="text-center">
+                <th>Sl. No.</th>
+                <th>Food Name</th>
+                <th>Count</th>
+                <th>Price Per Count</th>
+                <th>Add</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if lunch_veg|length %} {% for key, val in lunch_veg.items %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{key}}</td>
+                <td>{{val.1}}</td>
+                <td>Rs.{{val.0}}</td>
+                <td>{% if key in disabled.lunch %}
+                    <a class="btn btn-sm text-white btn-success col-6 disabled">
+                        Added <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                    <a href="{% url 'addtocartcustomer' id cid 'lunch' key val.0 val.1 'veg' %}" class="btn btn-sm text-white btn-warning col-6">
+                        Add to Cart <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="bg-dark text-white">
+                <th>Veg</th>
+                <th colspan="2">Total Amount per Plate</th>
+                <th>Rs.{{lunch_veg_total}} per Plate</th>
+                <th></th>
+            </tr>
+            {% endif %} {% if lunch_non|length %} {% for key, val in lunch_non.items %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{key}}</td>
+                <td>{{val.1}}</td>
+                <td>Rs.{{val.0}}</td>
+                <td>{% if key in disabled.lunch %}
+                    <a class="btn btn-sm text-white btn-success col-6 disabled" disabled>
+                        Added <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                    <a href="{% url 'addtocartcustomer' id cid 'lunch' key val.0 val.1 'non-veg' %}" class="btn btn-sm text-white btn-warning col-6">
+                        Add to Cart <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="bg-dark text-white">
+                <th>Non-Veg</th>
+                <th colspan="2">Total Amount per Plate</th>
+                <th>Rs.{{lunch_non_total}} per Plate</th>
+                <th></th>
+            </tr>
+            {% endif %}
+        </tbody>
+        {% endif %}{% if dinner_veg|length or dinner_non|length %}
+        <thead>
+            <tr class="mahal_management text-light font-weight-bold lead">
+                <td colspan="5">
+                    Dinner
+                </td>
+            </tr>
+            <tr class="text-center">
+                <th>Sl. No.</th>
+                <th>Food Name</th>
+                <th>Count</th>
+                <th>Price Per Count</th>
+                <th>Add/Delete</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% if dinner_veg|length %} {% for key, val in dinner_veg.items %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{key}}</td>
+                <td>{{val.1}}</td>
+                <td>Rs.{{val.0}}</td>
+                <td>{% if key in disabled.dinner %}
+                    <a class="btn btn-sm text-white btn-success col-6 disabled" disabled>
+                        Added <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                    <a href="{% url 'addtocartcustomer' id cid 'dinner' key val.0 val.1 'veg' %}" class="btn btn-sm text-white btn-warning col-6">
+                        Add to Cart <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="bg-dark text-white">
+                <th>Veg</th>
+                <th colspan="2">Total Amount per Plate</th>
+                <th>Rs.{{dinner_veg_total}} per Plate</th>
+                <th></th>
+            </tr>
+            {% endif %} {% if dinner_non|length %} {% for key, val in dinner_non.items %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{key}}</td>
+                <td>{{val.1}}</td>
+                <td>Rs.{{val.0}}</td>
+                <td>{% if key in disabled.dinner %}
+                    <a class="btn btn-sm text-white btn-success col-6 disabled" disabled>
+                        Added <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                    <a href="{% url 'addtocartcustomer' id cid 'dinner' key val.0 val.1 'non-veg' %}" class="btn btn-sm text-white btn-warning col-6">
+                        Add to Cart <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="bg-dark text-white">
+                <th>Non-Veg</th>
+                <th colspan="2">Total Amount per Plate</th>
+                <th>Rs.{{dinner_non_total}} per Plate</th>
+                <th></th>
+            </tr>
+            {% endif %}
+
+        </tbody>
+        {% endif %}
+    </table>
+    <div class="container">
+        <p class="display-3 text-light ">Cart List</p>
+    </div>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+        
+        input[type=date]::-webkit-inner-spin-button,
+        input[type=date]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(window).keydown(function(event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <table class="notify mb-5 table font-weight-bold table-striped">
+        {% if mrng_add|length or lunch_add|length or dinner_add|length %}
+        <form action="{% url 'customerbookcatering' id cid %}" method="POST">
+            {% csrf_token %}
+            <thead>
+                <tr class="text-center mahal_management text-white">
+                    <th>Veg/Non_veg</th>
+                    <th>Food Name</th>
+                    <th>Count</th>
+                    <th>Price Per Count</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% if mrng_add|length %}
+            <thead>
+                <tr class="catering_boys text-light font-weight-bold lead">
+                    <td colspan="5">
+                        Breakfast
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in mrng_add %}
+                <tr class="bg-dark text-white">
+                    <td>{{obj.veg_non}}</td>
+                    <td>{{obj.foodname}}</td>
+                    <td>{{obj.amount.1}}</td>
+                    <td>Rs.{{obj.amount.0}}</td>
+                    <td>
+                        <a href="{% url 'deletetocartcustomer' id cid 'mrng' obj.foodname %}" class="btn btn-sm font-weight-bold text-white btn-danger col-10">
+                        Delete <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style="background-color: grey;">
+                    <th colspan="3">Total Amount per Plate</th>
+                    <th>Rs.{{mrng_add_total}} per Plate</th>
+                    <th></th>
+                </tr>
+                <script>
+                    var amountmrng = "{{mrng_add_total}}";
+
+                    function onchangemrng() {
+                        var count = parseInt(document.getElementById('mrngInput').value);
+                        var value = count * amountmrng;
+                        document.getElementById('mrngCount').innerHTML = 'Rs. ' + value;
+                    }
+
+                    function changemrngminus() {
+                        var x = parseInt(document.getElementById('mrngInput').value);
+
+                        var value = (x - 1) * amountmrng;
+                        if (x > 1) {
+                            document.getElementById('mrngInput').value = x - 1;
+                            document.getElementById('mrngCount').innerHTML = 'Rs. ' + value;
+                        }
+                    }
+
+                    function changemrngplus() {
+                        var x = parseInt(document.getElementById('mrngInput').value);
+                        var value = (x + 1) * amountmrng;
+                        document.getElementById('mrngInput').value = x + 1;
+                        document.getElementById('mrngCount').innerHTML = 'Rs. ' + value;
+                    }
+                </script>
+                <tr class="bg-lignt text-dark">
+                    <th colspan="2">
+                        Total Number of Plates
+                    </th>
+                    <th>
+                        <div class=" form-inline col-6 mx-5 float-right">
+                            <label for="mrngInput" class="col-2" onclick="changemrngminus();"><span><i class="fas fa-minus" aria-hidden="true"></i></label>
+                            <input id="mrngInput" onkeyup="onchangelunch();" min='1' class="form-control form-control-sm col-4 text-center" type="text" onkeydown="onchangelunch();" value='1' name="mrngInput">
+                            <label for="mrngInput" class="col-2" onclick="changemrngplus();"><span><i class="fas fa-plus" aria-hidden="true"></i></label>
+                        </div>
+                    </th>
+                    <th id="mrngCount">
+                        Rs. {{lunch_add_total}}
+                    </th>
+                </tr>
+
+            </tbody>
+            {% endif %} {% if lunch_add|length %}
+            <thead class="">
+                <tr class="catering_boys text-light font-weight-bold lead ">
+                    <td colspan="5">
+                        Lunch
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in lunch_add %}
+                <tr class="bg-dark text-white">
+                    <td>{{obj.veg_non}}</td>
+                    <td>{{obj.foodname}}</td>
+                    <td>{{obj.amount.1}}</td>
+                    <td>Rs.{{obj.amount.0}}</td>
+                    <td>
+                        <a href="{% url 'deletetocartcustomer' id cid 'lunch' obj.foodname %}" class="btn btn-sm font-weight-bold text-white btn-danger col-10">
+                        Delete <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style="background-color: grey;">
+                    <th colspan="3">Total Amount per Plate</th>
+                    <th>Rs.{{lunch_add_total}} per Plate</th>
+                    <th></th>
+                </tr>
+                <script>
+                    var amountlunch = "{{lunch_add_total}}";
+
+                    function onchangelunch() {
+                        var x = parseInt(document.getElementById('lunchInput').value);
+                        var value = x * amountlunch;
+                        document.getElementById('lunchCount').innerHTML = 'Rs. ' + value;
+                    }
+
+                    function changelunchminus() {
+                        var x = parseInt(document.getElementById('lunchInput').value);
+
+                        var value = (x - 1) * amountlunch;
+                        if (x > 1) {
+                            document.getElementById('lunchInput').value = x - 1;
+                            document.getElementById('lunchCount').innerHTML = 'Rs. ' + value;
+                        }
+                    }
+
+                    function changelunchplus() {
+                        var x = parseInt(document.getElementById('lunchInput').value);
+                        var value = (x + 1) * amountlunch;
+                        document.getElementById('lunchInput').value = x + 1;
+                        document.getElementById('lunchCount').innerHTML = 'Rs. ' + value;
+                    }
+                </script>
+                <tr class="bg-light text-dark">
+                    <th colspan="2" class="">
+                        Total Number of Plates
+                    </th>
+                    <th>
+                        <div class=" form-inline col-6 mx-5 float-right">
+                            <label for="lunchInput" class="col-2" onclick="changelunchminus();"><span><i class="fas fa-minus" aria-hidden="true"></i></label>
+                            <input id="lunchInput" min='1' class="form-control form-control-sm col-4 text-center" type="number" onkeydown="onchangelunch();" onkeyup="onchangelunch();" value='1' name="lunchInput">
+                            <label for="lunchInput" class="col-2" onclick="changelunchplus();"><span><i class="fas fa-plus" aria-hidden="true"></i></label>
+                        </div>
+                    </th>
+                    <th id="lunchCount">
+                        Rs. {{lunch_add_total}}
+                    </th>
+                    <th></th>
+                </tr>
+
+            </tbody>
+            {% endif %} {% if dinner_add|length %}
+            <thead>
+                <tr class="catering_boys text-light font-weight-bold lead">
+                    <td colspan="5">
+                        Dinner
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in dinner_add %}
+                <tr class="bg-dark text-white">
+                    <td>{{obj.veg_non}}</td>
+                    <td>{{obj.foodname}}</td>
+                    <td>{{obj.amount.1}}</td>
+                    <td>Rs.{{obj.amount.0}}</td>
+                    <td>
+                        <a href="{% url 'deletetocartcustomer' id cid 'dinner' obj.foodname %}" class="btn btn-sm font-weight-bold text-white btn-danger col-10">
+                        Delete <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style='background-color:grey'>
+                    <th colspan="3">Total Amount per Plate</th>
+                    <th id='dinnerTotal'>Rs.{{dinner_add_total}} per Plate</th>
+                    <th></th>
+                </tr>
+                <script>
+                    var amountdinner = "{{dinner_add_total}}";
+
+                    function onchangedinner() {
+                        var count = parseInt(document.getElementById('dinnerInput').value);
+                        var value = count * amountdinner;
+                        document.getElementById('dinner').innerHTML = 'Rs. ' + value;
+                    }
+
+                    function changedinnerminus() {
+                        var x = parseInt(document.getElementById('dinnerInput').value);
+
+                        var value = (x - 1) * amountdinner;
+                        if (x > 1) {
+                            document.getElementById('dinnerInput').value = x - 1;
+                            document.getElementById('dinner').innerHTML = 'Rs. ' + value;
+                        }
+                    }
+
+                    function changedinnerplus() {
+                        var x = parseInt(document.getElementById('dinnerInput').value);
+                        var value = (x + 1) * amountdinner;
+                        document.getElementById('dinnerInput').value = x + 1;
+                        document.getElementById('dinner').innerHTML = 'Rs. ' + value;
+                    }
+                </script>
+                <tr class="bg-light text-dark ">
+                    <th colspan="2">
+                        Total Number of Plates
+                    </th>
+                    <th>
+                        <div class="form-inline col-6 mx-5 float-right">
+                            <label for="dinnerInput" class="col-2" onclick="changedinnerminus();"><span><i class="fas fa-minus" aria-hidden="true"></i></label>
+                            <input id="dinnerInput" class="form-control form-control-sm col-4 text-center" min="1" type="number" onkeyup="onchangedinner();" onkeydown="onchangedinner();" value='1' name="dinnerInput">
+                            <label for="dinnerInput" class="col-2" onclick="changedinnerplus();"><span><i class="fas fa-plus" aria-hidden="true"></i></label>
+                        </div>
+                    </th>
+                    <th id="dinner">
+                        Rs. {{dinner_add_total}}
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+            </tbody>
+            {% endif %}
+            <tbody>
+
+                <tr>
+                    <th>Address:</th>
+                    <th colspan="2" class="">
+                        <input type="text" class="form-control form-control-sm col-11" name="add" value="{{address.street}}, {{address.city}}, {{address.pincode}}">
+                    </th>
+                    <th>
+                        <input id="datefield" type="date" value="{{x|get_current_date}}" class="" name='date'>
+                    </th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th colspan="2">
+                        <a href="{% url 'deletecustomertemp' id cid  %}" class="btn btn-sm btn-danger  font-weight-bold float-right">Cancel Order</a>
+                    </th>
+                    <th colspan="2">
+                        <button type="" class="btn btn-sm btn-success col-4 font-weight-bold float-right">Request Order</button>
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </tbody>
+        </form>
+        {% endif %}
+        <tbody>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th colspan="5">
+                    <a href="{% url 'homecustomer' id %}" class="btn btn-dark font-weight-bold">Home</a>
+                </th>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock nav_body %}

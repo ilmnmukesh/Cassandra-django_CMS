@@ -1,0 +1,83 @@
+{% extends './nav.html'%} {% block title %} Mahal | Catering Request {% endblock title %} {% block nav_body%}
+
+<div class="text-center bg-dark text-light">
+    <h1 class="display-4 text-white">View Order Request and Accept List</h1>
+</div>
+<section class='mahal_management' style="height: 600px;">
+    {% if empty %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Service Boy Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in list_accept %}
+
+            <tr class="text-center">
+                <td scope="row">{{obj.name}}</td>
+                <td>{{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</td>
+                <td>{{obj.ph_numb}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.age}}</td>
+                <td>
+                    {% if obj.status != 'complete' %}
+                    <button class="btn btn-warning text-light font-weight-bold" disabled>Accepted
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    </button>
+                    <a href="{% url 'completecatboyrequestbymahal' id oid obj.id obj.date  %}" class="btn btn-success text-light font-weight-bold">Complete
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </a> {% else %}
+                    <button class="btn btn-success text-light font-weight-bold" disabled>Completed
+                        <i class="fa fa-check-double" aria-hidden="true"></i>
+                    </button> {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %} {% for obj in list_pending %}
+
+            <tr class="text-center">
+                <td scope="row">{{obj.name}}</td>
+                <td>{{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</td>
+                <td>{{obj.ph_numb}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.age}}</td>
+                <td>
+                    <a class="btn btn-success font-weight-bold" href="{% url 'acceptcatboyrequestbymahal' id  oid obj.id obj.date  %}">Accept</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+
+                <td colspan="6" class="text-center">
+                    <a href="{% url 'viewmahalorder' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Back</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <div class=" text-center text-white alert alert-warinng display-4" role="alert">
+        <strong>No One Yet to Request!</strong>
+        <div class=" text-center container font-weight-bold">
+            <a href="{% url 'viewmahalorder' id %}" class="btn  btn-danger col-3 font-weight-bold border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% endif%}
+</section>
+
+{%endblock%}

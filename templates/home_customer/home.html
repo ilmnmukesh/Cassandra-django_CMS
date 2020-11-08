@@ -1,0 +1,169 @@
+{% extends 'home_customer/nav.html' %} {% block title %}Customer| Home {% endblock title %} {% block nav_body %}
+<section class='catering_service'>
+    <h2 class="heading">
+        Catering Service
+    </h2>
+    <p class="text">
+        Find the best caters near You!!
+    </p>
+
+
+    <form class="form-inline" action="{% url 'customersearchcatering' id %}" method="POST">
+        {% csrf_token %}
+        <input class="form-control  mr-sm-2" type="search" name='q' placeholder="Search City Name" aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">   Search</button>
+    </form>
+    {% for obj in catering %}
+
+    <div class="container">
+        <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+            <div class="row no-gutters">
+                <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                    {% if obj.gallery_pic != '' %}
+                    <img class="card-img rounded" src="{{obj.gallery_pic}}" alt="prof"> {% elif obj.prof_img != '' %}
+                    <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                    <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <div class="row mt-4  font-weight-bold">
+
+                        <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+                        <p class='card-text text-success col-5'><span class="text-light">Experience:</span>{{obj.experience}}</p>
+
+                        <p class="card-text ml-3 text-success card-title col-5"><span class="text-light">Manager Name: </span>{{obj.manager}} </p>
+                        <p class="card-title col-5 mx-3 text-danger small"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                        <p class="card-title mt-2 col-5 text-center mx-3 text-success"><span class="text-light">Phone: </span>{{obj.contact.1}}</p>
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.contact.0}}</p>
+
+                        <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+                        {% if obj.msg is defined %}
+                        <div class="col-1">
+
+                        </div>
+                        <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                            <a href="{% url 'viewcateringuserbycustomer' id obj.id %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                View More</a></div> {% endif %}
+                        <p class="mx-5 card-text col-10 text-center text-warning">{{obj.msg}}</p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+    <div class=" text-center container col-4 font-weight-bold">
+        <a href="{% url 'viewcatering' id %}" class="btn btn-light col-8 font-weight-bold text-danger border-0 float-center">More Service</a>
+    </div>
+</section>
+
+<section class='mahal_management'>
+    <h2 class="heading">
+        Mahal Management
+    </h2>
+    <p class="text">
+        Find the best party places near You!!
+    </p>
+
+
+    <form class="form-inline " action="{% url 'customersearchmahal' id %}" method="POST">
+        {% csrf_token %}
+        <input class="form-control  mr-sm-2" type="search" name='q' placeholder="city name" aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">   Search</button>
+    </form>
+    {% for obj in mahal %}
+
+    <div class="container">
+        <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+            <div class="row no-gutters">
+                <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                    {% if obj.gallery_pic != '' %}
+                    <img class="card-img rounded" src="{{obj.gallery_pic}}" alt="prof"> {% elif obj.prof_img != '' %}
+                    <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                    <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <div class="row mt-4  font-weight-bold">
+
+                        <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+                        <p class='card-text text-success col-5'><span class="text-light">Build: </span>{{obj.build_yr}}</p>
+
+                        <p class="card-text ml-3 text-success card-title col-5"><span class="text-light">Manager Name: </span>{{obj.manager}} </p>
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                        <p class="card-title mt-2 col-5 text-center mx-3 text-success"><span class="text-light">Phone: </span>{{obj.contact.1}}</p>
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.contact.0}}</p>
+
+                        <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+
+                        <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                            <a href="{% url 'viewmahalbycustomer' id obj.id %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                  View More</a></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+    <div class=" text-center container col-4 font-weight-bold">
+        <a href="{% url 'viewmahal' id %}" class="btn btn-light col-8 font-weight-bold text-danger border-0 float-center">More Mahal</a>
+    </div>
+</section>
+<section class='catering_boys'>
+    <h2 class="heading">
+        Service BOYS
+    </h2>
+    <p class="text">
+        Find the best service boys near You!!
+    </p>
+
+
+    <form class="form-inline " action="{% url 'customersearchcatboy' id  %}" method="POST">
+        {% csrf_token %}
+        <input class="form-control  mr-sm-2" type="search" name='q' placeholder="city name" aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">   Search</button>
+    </form>
+    {% for obj in catboy%}
+    <div class="container">
+        <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+            <div class="row no-gutters">
+                <div class="col-md-5 float-right my-4 " style='height:200px; width:330px; overflow:hidden;'>
+                    {% if obj.prof_img != '' %}
+                    <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                    <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                </div>
+                <div class="col-md-7 my-5">
+                    <div class="row mt-4  font-weight-bold">
+
+                        <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.ph_numb}}</p>
+
+                        <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+    <div class=" text-center container col-4 font-weight-bold">
+        <a href="{% url 'viewcatboy' id %}" class="btn btn-light col-8 font-weight-bold text-danger border-0 float-center">More Boys Details</a>
+    </div>
+</section>
+
+
+
+{% endblock nav_body %}

@@ -1,0 +1,55 @@
+.banner1 {
+    position: relative;
+    width: 100%;
+    background: -webkit-linear-gradient(#12222d, yellowgreen);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catering_service {
+    padding: 100px;
+    text-align: center;
+    background: -webkit-linear-gradient(black, yellowgreen) !important;
+}
+
+.banner1 .bgg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+}
+
+.banner1 .content {
+    max-width: 750px;
+    position: relative;
+    text-align: center;
+}
+
+.banner1 span {
+    color: yellowgreen;
+}
+
+.banner1 header {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+}
+
+.banner1 header .logo {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 24px;
+}

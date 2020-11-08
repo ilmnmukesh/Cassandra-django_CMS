@@ -1,0 +1,241 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | Home {{total}} {% endblock title %} {% block nav_body%}
+<section class='banner'>
+    <div class="bgg">
+        <img src="/static/image/cater_banner.jpg">
+    </div>
+
+    <div class='content'>
+        <h2 class='heading'>You <span>don't need a Sliver spoon </span> to Eat Good Food</h2><br><br>
+    </div>
+</section>
+<h1 class="display-4 font-weight-bold text-center" style="border-bottom:2px solid yellowgreen;color: yellowgreen;">Catering services</h1>
+<div class="container-fluid p-3 my-4 row">
+
+    <div id="my-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li class="active" data-target="#my-carousel" data-slide-to="0" aria-current="location"></li>
+            {% if picture2.name != ''%}
+            <li data-target="#my-carousel" data-slide-to="1"></li>
+            {% endif %} {% if picture3.name != '' %}
+            <li data-target="#my-carousel" data-slide-to="2"></li>
+            {% endif %}
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row ml-4 p-2" style="width:1300px;">
+                    {% for obj in picture1 %}
+                    <div class="card  bg bg-dark col-md-3 mx-5 text-info" style=" color:yellowgreen">
+                        <div class="card-body">
+                            <div class="border-bottom border-info row">
+                                <div class="col-sm-6 font-weight-bold text-info">
+                                    <h4 class="card-title ">{{obj.name}}</h4>
+                                    <p class="card-text card-title text-danger">Rs.{{obj.amount}} </p>
+                                    <p class='card-text'> {{obj.date}}</p>
+                                    <p class='card-text text-danger'>{{obj.time}}</p>
+                                </div>
+
+                                <div class="col-sm-6 float-right my-2" style='height:120px; width:80px; overflow:hidden;'>
+                                    {% if obj.pic != '' %}
+                                    <img class="card-img img-thumbnails" src="{{obj.pic}}" alt="prof"> {% else %}
+                                    <img class="card-img img-fluid" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-left text-info font-weight-bold mt-3">
+                                <p class="card-title">Location: {{obj.venue.location}}</p>
+                                <p class="card-text small ">Address: {{obj.venue.address}}</p>
+                                <p class="card-text small">Contact: {{obj.venue.phone}}, {{obj.venue.mobile}}</p>
+
+                            </div>
+                            {% if obj.msg is defined %}
+                            <div class="" style="border-bottom: 2px solid yellowgreen;">
+                                <a href="{% url 'orderrequest' id obj.oid obj.date %}" class="text-center bg bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                Request</a></div> {% endif %}
+                            <p class="card-text small text-center text-warning">{{obj.msg}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if picture2.name != ''%}
+            <div class="carousel-item ">
+                <div class="row ml-4 p-2" style="width:1300px;">
+                    {% for obj in picture2 %}
+                    <div class="card  bg bg-dark col-md-3 mx-5 text-info" style=" color:yellowgreen">
+                        <div class="card-body">
+                            <div class="border-bottom border-info row">
+                                <div class="col-sm-6 font-weight-bold text-info">
+                                    <h4 class="card-title ">{{obj.name}}</h4>
+                                    <p class="card-text card-title text-danger">Rs.{{obj.amount}} </p>
+                                    <p class='card-text'> {{obj.date}}</p>
+                                    <p class='card-text text-danger'>{{obj.time}}</p>
+                                </div>
+
+                                <div class="col-sm-6 float-right my-2" style='height:120px; width:80px; overflow:hidden;'>
+                                    {% if obj.pic != '' %}
+                                    <img class="card-img img-thumbnails" src="{{obj.pic}}" alt="prof"> {% else %}
+                                    <img class="card-img img-fluid" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-left text-info font-weight-bold mt-3">
+                                <p class="card-title">Location: {{obj.venue.location}}</p>
+                                <p class="card-text small ">Address: {{obj.venue.address}}</p>
+                                <p class="card-text small">Contact: {{obj.venue.phone}}, {{obj.venue.mobile}}</p>
+
+                            </div>
+                            {% if obj.msg is defined %}
+                            <div class="" style="border-bottom: 2px solid yellowgreen;">
+                                <a href="{% url 'orderrequest' id obj.oid obj.date %}" class="text-center bg bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                Request</a></div> {% endif %}
+                            <p class="card-text small text-center text-warning">{{obj.msg}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %} {% if picture3.name != ''%}
+            <div class="carousel-item">
+                <div class="row ml-4 p-2" style="width:1300px;">
+                    {% for obj in picture3 %}
+                    <div class="card  bg bg-dark col-md-3 mx-5 text-info" style=" color:yellowgreen">
+                        <div class="card-body">
+                            <div class="border-bottom border-info row">
+                                <div class="col-sm-6 font-weight-bold text-info">
+                                    <h4 class="card-title ">{{obj.name}}</h4>
+                                    <p class="card-text card-title text-danger">Rs.{{obj.amount}} </p>
+                                    <p class='card-text'> {{obj.date}}</p>
+                                    <p class='card-text text-danger'>{{obj.time}}</p>
+                                </div>
+
+                                <div class="col-sm-6 float-right my-2" style='height:120px; width:80px; overflow:hidden;'>
+                                    {% if obj.pic != '' %}
+                                    <img class="card-img img-thumbnails" src="{{obj.pic}}" alt="prof"> {% else %}
+                                    <img class="card-img img-fluid" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-left text-info font-weight-bold mt-3">
+                                <p class="card-title">Location: {{obj.venue.location}}</p>
+                                <p class="card-text small ">Address: {{obj.venue.address}}</p>
+                                <p class="card-text small">Contact: {{obj.venue.phone}}, {{obj.venue.mobile}}</p>
+
+                            </div>
+                            {% if obj.msg is defined %}
+                            <div class="" style="border-bottom: 2px solid yellowgreen;">
+                                <a href="{% url 'orderrequest' id obj.oid obj.date %}" class="text-center bg bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                Request</a></div> {% endif %}
+                            <p class="card-text small text-center text-warning">{{obj.msg}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<a class="carousel-control-prev" href="#my-carousel" data-slide="prev" role="button">
+    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+    <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#my-carousel" data-slide="next" role="button">
+    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+    <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
+
+
+<h2 class="banner " style="color: #9acd32;">
+    <span><i class='fas fa-bell'></i> Notifications</span>
+</h2>
+<section class='notify banner'>
+
+    {% if empty_acc %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Amount </th>
+                <th>Timing</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in list_accept %}
+
+            <tr>
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.venue.address}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.time}}</td>
+                {% if False %}
+                <td>{% else %}
+                    <td><button type="button" class="btn btn-success" disabled>Accept</button> {% endif %}
+                    </td>
+            </tr>
+            {% endfor %} {% for obj in list_pending %}
+            <tr>
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.venue.address}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.time}}</td>
+                <td><button type="button" class="btn btn-primary font-weight-bold " disabled>Pending</button>
+                    <a class="btn btn-danger font-weight-bold" href="{% url 'ordercancel' id obj.id obj.date %}">Cancel</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="col-md-5 alert alert-warinng" role="alert">
+        <strong>No Notifications to You!</strong>
+        <a href="#" class="alert-link"></a>
+    </div>
+    {% endif %}
+
+
+</section>
+
+<section class='activity bg-info'>
+    <h2 class='heading border-bottom'>
+        Recent Activity
+    </h2>
+    {% if empty_comp %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr>
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Rating</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in list_complete %}
+
+            <tr>
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.venue.address}}</td>
+
+                <td>{{obj.time}}</td>
+                <td class="text-danger">{{obj.amount}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% else %}
+    <div class=" text-center alert alert-warinng" role="alert">
+        <strong>No Recents Activity to You!</strong>
+        <a href="#" class="alert-link"></a>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock%}

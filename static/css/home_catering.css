@@ -1,0 +1,100 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.heading {
+    color: #fff;
+    font-size: 60px;
+}
+
+.text {
+    color: white;
+    font-size: 18px;
+}
+
+.navbar .dropdown-menu .dropdown-item a:hover {
+    font-weight: 600;
+}
+
+.footer {
+    background: black;
+    padding: 20px 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer ul {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.footer ul li {
+    list-style: none;
+    padding: 6px;
+}
+
+.activity {
+    background-color: whitesmoke;
+    text-align: center;
+    align-items: center;
+}
+
+.notify {
+    background-color: white;
+    text-align: center;
+}
+
+.container1 {
+    width: 300px;
+}
+
+.container2 {
+    width: 220px;
+    text-align: center;
+}
+
+.container2 a {
+    padding-left: 50px;
+    padding-right: 50px;
+    border: 0;
+}
+
+.container4 {
+    height: 700px;
+    background-color: blue;
+}
+
+.catering_service {
+    padding: 100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d, rgb(34, 34, 2));
+}
+
+.catering_service form {
+    text-align: right !important;
+}
+
+.mahal_management {
+    padding: 100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d, red);
+}
+
+.catering_service form {
+    text-align: right !important;
+}
+
+.catering_boys {
+    padding: 100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d, #3475ca);
+}

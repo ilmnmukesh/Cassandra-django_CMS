@@ -1,0 +1,65 @@
+{% extends "home_mahal/nav.html" %} {% block title %} Mahal | View {{object.name}} {% endblock title %} {% block nav_body %}
+
+<div class="container-fluid mahal_management rounded">
+
+    <div class="container">
+        <p class="display-3 text-light border-bottom border-light">View {{object.name}} Service Boy</p>
+    </div>
+
+    <div class="container my-5  d-flex  bg bg-white text-danger rounded">
+
+        <div class="container p-3 mx-4 row">
+            <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                {% if object.prof_img != '' %}
+                <img class="card-img rounded" src="{{object.prof_img}}" alt="prof"> {% else %}
+                <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+            </div>
+            <div class="row my-2 col-7">
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-user "></i> 
+                        Name:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.name}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-building"></i>
+                        Age:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.age}}</p>
+                </div>
+
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-envelope "></i> 
+                        Email:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.email}}</p>
+                </div>
+
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-address-book"></i>
+                        Address:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.address.street}},{{object.address.city}},{{object.address.pincode}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-address-book"></i>
+                        Contact number:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">
+                        Mobile:{{object.ph_numb}}
+                    </p>
+                </div>
+
+
+                <div class=" col-md-4 text-center mt-5">
+                    <a name="" id="" class="btn-sm text-light font-weight-bold btn-success" href="{% url 'homemahal' id %}" role="button" style="text-decoration:none;">
+                            Home
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock nav_body %}

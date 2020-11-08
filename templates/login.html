@@ -1,0 +1,62 @@
+{%extends 'nav.html'%} {% load static%} {% block title %} Login {% endblock title %} {% block nav_body%}
+
+<div class="container my-5" onload="noBack();" onpageshow='if (event.persited) noBack();' onunload=''>
+    <div class="container d-flex ">
+        <div class="container d-flex border border-info p-4 mt-5 " style="height:430px;border-radius: 2rem;background-color:#ffffff ">
+            <div class="container d-flex row ">
+                <div class="container col-md-6 text-center my-5 text-info ">
+                    <span class="my-5 fas fa-heatbeat register-left "><img src="{% static 'image/logo_cat.png'%}" width="q00px" height="200px"></span>
+                    <div class="text-center font-weight-bold text-danger mt-2">
+                        <p>{{msg}}</p>
+                    </div>
+                </div>
+
+                <div class="container col-md-6 ">
+                    <div class="jumbotron " style="background-color:#ffffff;border-radius:2rem; ">
+                        <h1 class="display-4 my-2 text-info ">Login</h1>
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-group my-4 border-bottom border-info ">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text text-info bg-white border-0 " id=" my-addon "><i class="fas fa-user "></i></span>
+                                </div>
+
+                                <input class="form-control border-0 font-weight-bold text-info" value="{{email}}" required type="email" name="email" placeholder="Your's E-mail Id" aria-label="Recipient 's " aria-describedby="my-addon">
+                            </div>
+                            <div class="input-group my-4 border-bottom border-info">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info bg-white border-0" id="my-addon"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input id="pass" class=" pwd form-control border-0 font-weight-bold text-info" required type="password" name="password" placeholder="Password*" aria-label="Recipient's " aria-describedby="my-addon ">
+                                <span class="input-group-btn mx-5  mt-2 text-info fas fa-fw fa-eye-slash field_icon toggle-password" toggle="#password-field">
+                    
+                                </span>
+                                <script>
+                                    $("body").on('click', '.toggle-password',
+                                        function() {
+                                            $(this).toggleClass(" fa-eye-slash fa-eye");
+                                            var $pwd = $('.pwd');
+                                            if ($pwd.attr('type') === 'password') {
+                                                $pwd.attr('type', 'text');
+                                            } else {
+                                                $pwd.attr('type', 'password');
+                                            }
+                                        }
+                                    );
+                                </script>
+                            </div>
+                            <div class="container-fluid ">
+                                <a href="{% url 'signup'%}" class="btn btn-danger border-0 font-weight-bold " style="border-radius: 2rem; ">Signup</a>
+                                <button type="submit " class="btn btn-success float-right border-0 font-weight-bold " style="border-radius: 2rem; ">Login</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{%endblock nav_body%}

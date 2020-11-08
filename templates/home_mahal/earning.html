@@ -1,0 +1,69 @@
+ {% extends "./nav.html" %} {% block title %} Mahal | Earnings {% endblock title %} {% block nav_body %}
+<div class="mahal_management text-white bg bg-light " style="background-color: grey !important;">
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Earnings</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Ordered By</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Amount</th>
+                <th>Rent Hour</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        {% if calendar|length %}
+        <tbody>
+            {% for obj in calendar %}
+            <tr>
+                <th>{{obj.booker_name}}</th>
+                <th>{{obj.from_date}}</th>
+                <th>{{obj.to_date}}</th>
+                <th>Rs. {{obj.amount}}</th>
+                <th>{{obj.rent_hr}}</th>
+                {% if obj.status == "blocked" %}
+                <th>
+                    <a class="btn btn-dark font-weight-bold">Blocked <i class="fa fa-times" aria-hidden="true"></i>  </a>
+                </th>
+                {% else %}
+                <th>
+                    <a class="btn btn-dark font-weight-bold">View<i class="fa fa-times" aria-hidden="true"></i>  </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            <tr>
+                <th colspan="3">Total: </th>
+                <th>Rs. {{total}}</th>
+                <th colspan="2"></th>
+            </tr>
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <th colspan="6">No Earning Avaliable</th>
+            </tr>
+        </tbody>
+        {% endif %}
+        <thead>
+            <tr>
+                <th colspan="6"> </th>
+            </tr>
+        </thead>
+        <thead>
+            <th colspan="6">
+                <a href="{% url 'homemahal' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Home</a>
+            </th>
+        </thead>
+
+
+    </table>
+</div>
+{% endblock %}

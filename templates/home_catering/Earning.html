@@ -1,0 +1,63 @@
+{% extends 'home_catering/nav.html'%} {% block title %}Catering Service | Earning {{total}} {% endblock title %} {% block nav_body%}
+<div class="catering_service">
+
+
+    <div class="text-center text-light">
+        <h1 class="display-4 text-white">Earnings</h1>
+    </div>
+    <table class="mb-5 catering_service table text-light font-weight-bold table-striped">
+        {% if request|length %}
+        <thead>
+            <tr class="text-center text-light">
+                <th>Date@time</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>No of Plates</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for obj in request %}
+            <tr>
+                <th>{{obj.date}}@ {{obj.reg_type}}</th>
+                <th>{{obj.address}}</th>
+                <th>Rs. {{obj.amount}}</th>
+                <th>{{obj.plates}}</th>
+                <th>
+                    <a href="{% url 'viewcateringrequest' id obj.booker_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-success">
+                    View Order<i class="fas fa-check-double" aria-hidden="true"></i>
+                </a>
+                </th>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th colspan="3">Total:</th>
+                <th>{{total}}</th>
+                <th></th>
+            </tr>
+
+        </tbody>
+        {%else %}
+        <thead>
+            <tr class="text-center text-light">
+
+                <th>Date@time</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>No of Plates</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="5">
+                    No Earning Found
+                </th>
+            </tr>
+        </tbody>
+        {% endif %}
+
+    </table>
+</div>
+{%endblock%}

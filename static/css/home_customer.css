@@ -1,0 +1,26 @@
+.catering_service{
+    padding:100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d ,yellow);
+}
+
+.catering_service form{
+    text-align: right !important;
+}
+
+
+.mahal_management{
+    padding:100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d ,red);
+}
+
+.catering_service form{
+    text-align: right !important;
+}
+
+.catering_boys{
+    padding:100px;
+    text-align: center;
+    background: -webkit-linear-gradient(#12222d ,#3475ca);
+}

@@ -1,0 +1,178 @@
+{% extends 'home_mahal/nav.html' %} {% block title %} Mahal | Home {% endblock title %} {% block nav_body %}
+<section class=' banner '>
+    <div class="bgg">
+        <img src="/static/image/cater_banner.jpg">
+    </div>
+
+    <div class='content'>
+        <h2 class='heading'>You <span>don't need a Sliver spoon </span> to Eat Good Food</h2><br><br>
+    </div>
+</section>
+
+<section class='notify mahal_management'>
+    <h2 class="text-warning">
+        <i class='fas fa-bell text-warning'></i> notify
+    </h2>
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Timing</th>
+                <th>Amount</th>
+                <th>Remaining Count</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        {% if current_catboy|length %}
+        <tbody>
+            {% for obj in current_catboy %}
+            <tr class="text-center">
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.time}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.catboy_max}} / {{obj.count}}</td>
+                {% if obj.count_empty %}
+                <td>
+                    <a class="btn btn-light text-danger font-weight-bold" href="{% url 'viewcateringrequestbymahal' id obj.id %}">View</a>
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-dark text-white font-weight-bold" href="{% url 'viewcatboyrequestbymahal' id obj.id %}">Accept Request</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr rowspan="2">
+                <td colspan="6">No Notifications</td>
+            </tr>
+        </tbody>
+
+        {% endif %}
+    </table>
+
+
+    <div class="border-top border-white my-5">
+        <h2 class="heading text-warning">
+            Service Boys
+        </h2>
+        <p class="text">
+            Find the best service boys near You!!
+        </p>
+        <form class="form-inline mx-4" action="{% url 'mahalsearchcatboy' id  %}" method="POST">
+            {% csrf_token %}
+            <input class="form-control col-3 mr-sm-2" type="search" name='q' placeholder="city name" aria-label="Search">
+            <button class="btn btn-dark font-weight-bold text-white my-2 my-sm-0" type="submit"> Search</button>
+        </form>
+        {% for obj in list_catboy%}
+        <div class="container">
+            <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-5 float-right my-4 " style='height:200px; width:330px; overflow:hidden;'>
+                        {% if obj.prof_img != '' %}
+                        <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                        <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                    </div>
+                    <div class="col-md-7 my-2">
+                        <div class="row mt-4  font-weight-bold">
+
+                            <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+
+                            <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                            <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.ph_numb}}</p>
+
+                            <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+                            {% if obj.msg is defined %}
+                            <div class="col-1">
+
+                            </div>
+                            <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                                <a href="{% url 'viewcatboyuserbymahal' id obj.id %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                  View More</a></div> {% endif %}
+                            <p class="mx-5 card-text col-10 text-center text-warning">{{obj.msg}}</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class=" text-center container col-4 font-weight-bold">
+            <a href="{% url 'mahalviewcatboy' id %}" class="btn btn-light col-8 font-weight-bold text-danger border-0 float-center">More Boys Details</a>
+        </div>
+    </div>
+
+    <div class="border-top border-white my-5">
+        <h2 class="heading text-warning">
+            Catering Service
+        </h2>
+        <p class="text">
+            Find the best caters near You!!
+        </p>
+
+        <form class="form-inline mx-4" action="{% url 'mahalsearchcatering' id %}" method="POST">
+            {% csrf_token %}
+            <input class="form-control col-3 mr-sm-2" type="search" name='q' placeholder="Search Catering Service" aria-label="Search">
+            <button class="btn btn-dark text-white font-weight-bold my-2 my-sm-0" type="submit">   Search</button>
+        </form>
+        {% for obj in list_catering %}
+
+        <div class="container">
+            <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+
+                        {% if obj.gallery_pic != '' %}
+                        <img class="card-img rounded" src="{{obj.gallery_pic}}" alt="prof"> {% elif obj.prof_img != '' %}
+                        <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                        <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row mt-4  font-weight-bold">
+
+                            <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+                            <p class='card-text text-success col-5'><span class="text-light">Experience:</span>{{obj.experience}}</p>
+
+                            <p class="card-text ml-3 text-success card-title col-5"><span class="text-light">Manager Name: </span>{{obj.manager}} </p>
+                            <p class="card-title col-5 mx-3 text-danger small"><span class="text-light ">Email: </span>{{obj.email}}</p>
+
+                            <p class="card-title mt-2 col-5 text-center mx-3 text-success"><span class="text-light">Phone: </span>{{obj.contact.1}}</p>
+                            <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.contact.0}}</p>
+
+                            <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+                            {% if obj.msg is defined %}
+                            <div class="col-1">
+
+                            </div>
+                            <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                                <a href="{% url 'viewcateringuserbymahal' id obj.id %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                    View More</a></div> {% endif %}
+                            <p class="mx-5 card-text col-10 text-center text-warning">{{obj.msg}}</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+        <div class=" text-center container col-4 font-weight-bold">
+            <a href="{% url 'mahalviewcatering' id %}" class="btn btn-light col-8 font-weight-bold text-danger border-0 float-center">More Service</a>
+        </div>
+    </div>
+</section>
+
+{% endblock nav_body %}

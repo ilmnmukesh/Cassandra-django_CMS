@@ -1,0 +1,86 @@
+{% extends 'home_customer/nav.html' %} {% block title %}Customer| Mahal Service {% endblock title %} {% block nav_body %}
+<section class='mahal_management'>
+    <h2 class="heading">
+        Mahal Management
+    </h2>
+    {% if search|length %}
+    <p class="text">
+        Search Results of {{search}} Found {{ mahal.paginator.count }}
+    </p>
+    {% else %}
+    <p class="text">
+        Find the best party places near You!!
+    </p>
+    {% endif %} {% if mahal|length %} {% for obj in mahal %}
+
+    <div class="container">
+        <div class="card mb-3 bg-dark col-md-9 mt-3" style="max-width: 100%;">
+            <div class="row no-gutters">
+                <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                    {% if obj.gallery_pic != '' %}
+                    <img class="card-img rounded" src="{{obj.gallery_pic}}" alt="prof"> {% elif obj.prof_img != '' %}
+                    <img class="card-img rounded" src="{{obj.prof_img}}" alt="prof"> {% else %}
+                    <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <div class="row mt-4  font-weight-bold">
+
+                        <p class="card-title ml-3 col-5  text-danger"> <span class="text-light">Name: </span>{{obj.name}}</p>
+                        <p class='card-text text-success col-5'><span class="text-light">Build: </span>{{obj.build_yr}}</p>
+
+                        <p class="card-text ml-3 text-success card-title col-5"><span class="text-light">Manager Name: </span>{{obj.manager}} </p>
+                        <p class="card-title col-5 mx-3 text-danger small"><span class="text-light">Email: </span>{{obj.email}}</p>
+
+                        <p class="card-title mt-2 col-5 text-center mx-3 text-success"><span class="text-light">Phone: </span>{{obj.contact.1}}</p>
+                        <p class="card-title col-5 mx-3 text-danger"><span class="text-light">Mobile: </span>{{obj.contact.0}}</p>
+
+                        <p class="card-text col-11 text-center text-info"><span class="text-light">Address:</span> {{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</p>
+
+                        <div class="mx-5 bg-dark col-10" style="border-bottom: 2px solid yellowgreen;">
+                            <a href="{% url 'viewmahalbycustomer' id obj.id %}" class="text-center bg-dark border-0 font-weight-bold list-group-item list-group-item-action" style=" color: yellowgreen;">
+                                  View More</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+    <div class="justify-content-center"> {% if mahal.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% if mahal.has_previous %}
+            <li class="page-item bg-info"><a class="page-link" href="?page_mahal={{ mahal.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %} {% for i in mahal.paginator.page_range %} {% if mahal.number == i %}
+            <li class="page-item active"><span class="page-link">{{i}}<span class="sr-only">(current)</span></span>
+            </li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page_mahal={{ i }}">{{i}}</a></li>
+            {% endif %} {% endfor %} {% if mahal.has_next %}
+            <li class="page-item"><a class="page-link" href="?page_mahal={{ mahal.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="mahal_management">
+        <p class="display-4 text-light">No Results Found!</p>
+    </div>
+    {% endif %}
+
+</section>
+
+<table class="mahal_management notify mb-5 table font-weight-bold table-striped">
+    <tbody>
+        <tr>
+            <th colspan="5">
+                <a href="{% url 'homecustomer' id %}" class="btn btn-light font-weight-bold">Home</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

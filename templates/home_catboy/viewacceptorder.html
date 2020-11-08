@@ -1,0 +1,59 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | Order Accept {{total}} {% endblock title %} {% block nav_body%}
+<div class="banner">
+    <h1 class="display-3 text-white">View Order Accpeted</h1>
+</div>
+<section class='banner' style="height: 600px;">
+    {% if empty %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Service Boy Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in list_accept %}
+
+            <tr class="text-center">
+                <td scope="row">{{obj.name}}</td>
+                <td>{{obj.address.street}}, {{obj.address.city}}, {{obj.address.pincode}}</td>
+                <td>{{obj.ph_numb}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.age}}</td>
+                <td>
+                    <button class="btn btn-warning text-light font-weight-bold" disabled>Accepted</button> {% if obj.complete %}
+                    <a class="btn btn-success font-weight-bold" href="{% url 'catboyordercomplete' id obj.id oid obj.date %}">Complete</a> {% else %}
+                    <button class="btn btn-success text-light font-weight-bold" disabled>Completed</button> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+
+                <td colspan="6" class="text-center"> <a href="{% url 'viewcatboyorder' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Back</a></td>
+
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <div class=" text-center alert alert-warinng display-4" role="alert">
+        <strong>No One Yet to Request!</strong>
+        <div class=" text-center container font-weight-bold">
+            <a href="{% url 'viewcatboyorder' id %}" class="btn col-3 font-weight-bold btn-danger border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% endif%}
+</section>
+
+{%endblock%}

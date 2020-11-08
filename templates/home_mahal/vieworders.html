@@ -1,0 +1,181 @@
+{% extends "./nav.html" %} {% block title %} Mahal | View Orders {% endblock title %} {% block nav_body %}
+<div class="mahal_management text-white bg bg-light " style="background-color: grey !important;">
+    <div class="border-bottom border-light mb-5">
+        <p class="display-3">Order List</p>
+    </div>
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Your's Requirment</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr class="text-center text-light">
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Timing</th>
+                <th>Amount</th>
+                <th>Remaining Count</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        {% if current_catering|length %}
+        <tbody>
+            {% for obj in current_catering %}
+            <tr class="text-center">
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.time}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.catboy_max}} / {{obj.count}}</td>
+                {% if obj.count_empty %}
+                <td>
+                    <a class="btn btn-light text-danger font-weight-bold" href="{% url 'viewcateringrequestbymahal' id obj.id %}">View</a>
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-dark text-white font-weight-bold" href="{% url 'viewcatboyrequestbymahal' id obj.id %}">Accept Request</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr rowspan="2">
+                <td colspan="6">No Notifications</td>
+            </tr>
+        </tbody>
+
+        {% endif %}
+    </table>
+
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Calendar</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Ordered By</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Amount</th>
+                <th>Rent Hour</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        {% if calendar|length %}
+        <tbody>
+            {% for obj in calendar %}
+            <tr>
+                <th>{{obj.booker_name}}</th>
+                <th>{{obj.from_date}}</th>
+                <th>{{obj.to_date}}</th>
+                <th>Rs. {{obj.amount}}</th>
+                <th>{{obj.rent_hr}}</th>
+                {% if obj.status == "blocked" %}
+                <th>
+                    <a class="btn btn-dark font-weight-bold">Blocked <i class="fa fa-times" aria-hidden="true"></i>  </a>
+                </th>
+                {% elif obj.status == "complete" %}
+                <th>
+                    <a href="{% url 'viewcustomerorderbymahal' id obj.cid obj.from_date obj.to_date %}" class="btn btn-success font-weight-bold">View<i class="fa fa-check-circle" aria-hidden="true"></i>  </a>
+                </th>
+                {% elif obj.status == "cancel" %}
+                <th>
+                    <a href="{% url 'viewcustomerorderbymahal' id obj.cid obj.from_date obj.to_date %}" class="btn btn-danger font-weight-bold">View<i class="fa fa-times-circle" aria-hidden="true"></i>  </a>
+                </th>
+                {% else %}
+                <th>
+                    <a href="{% url 'viewcustomerorderbymahal' id obj.cid obj.from_date obj.to_date %}" class="btn btn-info font-weight-bold">View<i class="fa fa-check" aria-hidden="true"></i>  </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <th colspan="6">No Date Yet Book</th>
+            </tr>
+        </tbody>
+        {% endif %}
+        <thead>
+            <tr>
+                <th colspan="6"> </th>
+            </tr>
+        </thead>
+
+    </table>
+
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Your's Order</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr class="text-center text-light">
+
+                <th>Date@time</th>
+                <th>Address</th>
+                <th>Amount</th>
+                <th>No of Plates</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for obj in service_book %}
+            <tr>
+                <th>{{obj.date}}@ {{obj.reg_type}}</th>
+                <th>{{obj.address}}</th>
+                <th>Rs. {{obj.amount}}</th>
+                <th>{{obj.plates}}</th>
+                {% if obj.status == "pending" %}
+                <th>
+                    <a href="{% url 'viewcateringrequestbymahal' id obj.receiver_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-info">View Order</a>
+                </th>
+                {% elif obj.status == "cancel" %}
+                <th>
+                    <a href="{% url 'viewcateringrequestbymahal' id obj.receiver_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-danger">
+                        View Order <i class="fas fa-times "></i>
+                    </a>
+                </th>
+                {% elif obj.status == "complete" %}
+                <th>
+                    <a href="{% url 'viewcateringrequestbymahal' id obj.receiver_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-success">
+                        View Order<i class="fas fa-check-double" aria-hidden="true"></i>
+                    </a>
+                </th>
+                {% else %}
+                <th>
+                    <a href="{% url 'viewcateringrequestbymahal' id obj.receiver_id obj.reg_type obj.date|string %}" class="btn btn-sm btn-success">
+                        View Order<i class="fas fa-check" aria-hidden="true"></i>
+                    </a>
+                </th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+            <tr>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <th colspan="6">
+                    <a href="{% url 'homemahal' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Home</a>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock nav_body %}

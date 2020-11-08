@@ -1,0 +1,150 @@
+{% extends "home_catering/base.html" %} {% load static%} {%block css%}
+<link rel="stylesheet" href="{% static 'css/banner1.css'%}">
+<link rel="stylesheet" href="{% static 'css/home_customer.css'%}">
+<link rel="stylesheet" href="{% static 'css/home_catering.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+<link rel="stylesheet" href="{% static 'css/pic_inputs.css'%}"> {%endblock css%} {% block js%}
+<script src="{% static 'js/pics.js'%}"></script>
+<script src="{% static 'js/back.js'%}"></script>
+<script src="{% static 'js/date.js'%}"></script>
+{%endblock js%}{% block body%} {%block nav%}
+<nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+    <a class="nav-link" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/static/image/dropdown_log.png" width="30" height="30" alt="">
+    </a>
+
+    <div class="dropdown-menu " aria-labelledby="dropdownId">
+        <div class="container " style="text-align:center ;">
+            <a name="" id="" class="btn btn-light" href="{% url 'cateringorder' id %}" role="button"><i class="fas fa-plus-circle mr-3"></i>Service-boy Order</a>
+        </div>
+        <hr>
+        <div class="container">
+            <br>
+            <a href="{% url 'homecatering' id %}" class="dropdown-item"><i class='fas fa-home mr-3'></i>Home</a>
+            <a href="{% url 'cateringgallery' id %}" class="dropdown-item"><i class='fas fa-plus mr-3'></i>Add Photo</a>
+            <a href="{% url 'createfoodlist' id %}" class="dropdown-item"><i class='fas fa-cart-plus mr-3'></i>Add Food List</a>
+            <a href="{% url 'viewcateringorder' id %}" class="dropdown-item"><i class='fas fa-street-view mr-3'></i>View Order</a>
+            <a href="{% url 'cateringhistory' id %}" class="dropdown-item"><i class='fas fa-history mr-3'></i>History</a>
+            <a href="{% url 'cateringearning' id %}" class="dropdown-item"><i class='fas fa-rupee-sign mr-3'></i>Earnings</a>
+
+            <hr>
+            <a href="{% url 'logout' id %}" class="dropdown-item"> <i class='fas fa-sign-out-alt'></i> Logout</a>
+        </div>
+    </div>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item ml-5">
+                <img src="/static/image/logo_cat.png" height="40px" width="40px">
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link mr-5 font-weight-bold" href="{% url 'home' %}" style="color: -webkit-linear-gradient(blue,black) !important;">CATERING</a>
+            </li>
+
+            {% if home == "home" %}
+            <form class="form-inline mx-5 col-8" action="{% url 'searchcatboybycatering' id %}" method="POST">
+                {% csrf_token %}
+                <input id="input1" list="cateringboyname" class="form-control form-control-sm col-7 mr-sm-2" name="q" onkeypress="search();" type="search" placeholder="Search Service Boy" aria-label="Search">
+                <datalist id="cateringboyname">
+                </datalist>
+                <button class="btn btn-sm btn-outline-success col-3 my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            {% endif %}
+        </ul>
+        {% if home == "home" %}
+        <form class="form-inline my-2 my-lg-0">
+            <div class="btn-group">
+                <button class="btn " type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span><i class="fas fa-user rounded-circle border fa-2x overflow-hidden"></i></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+
+                    <div class="container1" style="text-align: center;">
+
+                        <a href=''>
+                            {% if prof_img == '' %}
+                            <span class="logo my-3  text-info "><i class="fas fa-user fa-3x rounded-circle border border-info overflow-hidden"></i></span>
+                            {% else %}
+                            <img  class='logo my-3 rounded-circle' title="profile" src='{{prof_img}}' height="90px" width="80px" style="border-radius: 4px;">
+                            {% endif %}
+                        </a>
+                        <p>{{name}}</p>
+                        <p>{{email}}</p>
+                        <a class="btn btn-info bottom-0 border-info btn-floating " href="{% url 'editcatering' id %}" role="button">edit profile</a>
+                        <hr>
+                        <a href="{% url 'signup' %}">
+                            <p style="text-decoration: none; font-size:small; color:black;"><i class='fas fa-user-plus'></i> Add another account</p>
+                        </a>
+                        <hr>
+                        <a class="btn btn-light" href="{% url 'logout' id %}" role="button"><i class="fas fa-sign-out"></i>logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        {% endif %}
+    </div>
+</nav>
+{% block nav_body%} {% endblock nav_body %}
+
+<section id="footer" class="font-weight-bold">
+    <div class="container ">
+        <div class="row text-center text-xs-center text-sm-left text-md-left ">
+            <div class="col-xs-12 col-sm-4 col-md-4 ">
+                <h5>Quick links</h5>
+                <ul class="list-unstyled quick-links ">
+                    {% if home == "home " %}
+                    <li> <a href="# " class="dropdown-item "><i class='fas fa-home mr-3'></i>Home</a>
+
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'homecatering' id %} " class="dropdown-item "><i class='fas fa-home mr-3'></i>Home</a>
+                    </li>
+                    {% endif %}
+
+                    <li>
+                        <a href="{% url 'cateringgallery' id %} " class="dropdown-item "><i class='fas fa-plus mr-3'></i>Add Photo</a>
+
+                    </li>
+                    <li>
+                        <a href="{% url 'createfoodlist' id %} " class="dropdown-item "><i class='fas fa-cart-plus mr-3'></i>Add Food List</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'viewcateringorder' id %} " class="dropdown-item "><i class='fas fa-street-view mr-3'></i>View Order</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cateringhistory' id %} " class="dropdown-item "><i class='fas fa-history mr-3'></i>History</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cateringearning' id %} " class="dropdown-item "><i class='fas fa-rupee-sign mr-3'></i>Earnings</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5 ">
+            <ul class="list-unstyled list-inline social text-center ">
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-user "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-copyright "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); " target="_blank "><i class="fa fa-envelope "></i></a></li>
+                <li class="list-inline-item "><a href="javascript:void(); "><i class="fas fa-users "></i></a></li>
+            </ul>
+        </div>
+        </hr>
+
+        <div class="row ">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white ">
+                <p class="h6 ">&copy All right Reversed.
+                    <a class="text-green ml-2 " href="https://www.sunlimetech.com " target="_blank "></a>
+                </p>
+            </div>
+            </hr>
+        </div>
+    </div>
+</section>
+
+{% endblock nav %} {% endblock body%}

@@ -1,0 +1,54 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | History{{total}} {% endblock title %} {% block nav_body%}
+<div class="banner">
+    <h1 class="display-3 text-white">History</h1>
+</div>
+<section class='banner' style="height: 600px;">
+    {% if empty %}
+    <div class="row">
+        {% for obj in complete %}
+        <div class="card border-0 col-md-3 mx-5 my-3 text-info" style="color:yellowgreen">
+
+            <div class="card-body">
+                <div class="border-bottom border-info row">
+                    <div class="col-sm-6 font-weight-bold text-info">
+                        <h4 class="card-title ">{{obj.name}}</h4>
+                        <p class="card-text card-title text-danger">Rs.{{obj.amount}} </p>
+                        <p class='card-text'> {{obj.date}}</p>
+                        <p class='card-text text-danger'>{{obj.time}}</p>
+
+
+                        {% if obj.msg is defined %} {% endif %}
+                        <p class="card-text text-center text-warning">{{obj.msg}}</p>
+                        <p class="card-text"><br></p>
+                    </div>
+
+                    <div class="col-sm-6 float-right">
+                        <img class="card-img" src="{{obj.pic}}" width="180px" height="150px" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center text-info font-weight-bold">
+                    <p class="card-text ">{{obj.venue.location}}</p>
+                    <p class="card-text">{{obj.venue.address}}</p>
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        <div class=" text-center container font-weight-bold">
+            <br><br>
+            <a href="{% url 'homecatboy' id %}" class="btn  btn-danger col-3 border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% else %}
+    <div class=" text-center alert alert-warinng display-4" role="alert">
+        <strong>No History Found for You!</strong>
+        <div class=" text-center container font-weight-bold">
+            <a href="{% url 'homecatboy' id %}" class="btn  btn-danger border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% endif%}
+
+</section>
+
+{%endblock%}

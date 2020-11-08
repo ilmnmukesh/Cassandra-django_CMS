@@ -1,0 +1,121 @@
+{% extends 'home_mahal/nav.html' %} {% block title %} Mahal | Book CB {% endblock title %} {% block nav_body %}
+<div class='mahal_management'>
+    <style>
+        .text-info {
+            color: #dc3545 !important;
+        }
+    </style>
+    <div class="container-fluid p-2 mt-3">
+        <div class="container">
+            <div class="container-fluid bg bg-light  text-info my-5 " style="height:550px;">
+                <div class="container">
+                    <div class="text-center font-weight-bold" style="border-bottom: 2px solid yellowgreen; color:yellowgreen">
+                        <h1 class="display-3">Create Catering Boys</h1>
+                    </div>
+                    <div class="col-md-10">
+
+                        <form action="{% url 'createcatboyorderbymahal' id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="container row mx-5 mt-5">
+                                <div class="col-md-2 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">Venue:</label>
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 mx-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-address-book" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control border-0 bg-light text-info" type="text" required name="add" value="{{address.street}}" placeholder="Address" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 mr-3">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-city" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control-sm border-0 bg-light text-info" type="text" required name="city" value="{{address.city}}" placeholder="City" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 ">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-code" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control-sm border-0 bg-light text-info" type="number" required value="{{address.pincode}}" name="pincode" placeholder="pincode" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                            </div>
+                            <div class="container row mx-5 mt-3">
+                                <div class="col-md-2 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">Amount/Head:</label>
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 mx-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-rupee-sign" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control border-0 bg-light text-info" required type="number" name="amount" value="300" min="300" placeholder="Amount Per Head" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                                <div class="col-md-3 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">No. of Catering Boys:</label>
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 mx-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-users" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control border-0 bg-light text-info" required type="number" name="nocatboy" value="0" placeholder="No of Catboy" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                            </div>
+                            <div class="container row mx-5 mt-3">
+                                <div class="col-md-2 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">Date:</label>
+                                </div>
+                                <div class="input-group col-md-4 border-bottom border-info my-2 mx-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-calendar-alt" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input id='date' required class="form-control form-control border-0 bg-light text-info" type="date" value='2020-04-30' name="date" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                                <div class="col-md-2 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">Timing</label>
+                                </div>
+                                <div class="input-group col-md-3 border-bottom border-info my-2 mx-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fa fa-clock" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input required class="form-control form-control border-0 bg-light text-info" type="time" value="19:00:00" name="time" value="0" placeholder="Time" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                            </div>
+                            <div class="container row mx-5 mt-3">
+                                <div class="col-md-2 my-2 mx-2 font-weight-bold" style=" color:yellowgreen">
+                                    <label class="my-2 text-info">Contact:</label>
+                                </div>
+                                <div class="input-group col-md-4 border-bottom border-info my-2 mr-2">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-phone" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input id='date' class="form-control form-control border-0 bg-light text-info" type="number" required value="{{contact.1}}" name="phone" laceholder="Phone Number" aria-label="Recipient's " aria-describedby="my-addon">
+                                </div>
+                                <div class="input-group col-md-4 border-bottom border-info my-2 ml-5">
+                                    <div class="input-group-prepend text-center">
+                                        <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-mobile" style=" color:yellowgreen"></i></span>
+                                    </div>
+                                    <input class="form-control form-control border-0 bg-light text-info" type="number" name="mobile" required value="{{contact.0}}" placeholder="Mobile Number " aria-label="Recipient 's " aria-describedby="my-addon">
+                                </div>
+                            </div>
+                            <div class="container row mx-5 ">
+
+
+                                <div class=" col-md-6 text-center mt-5">
+                                    <a name="" id="" class="btn-sm text-light btn font-weight-bold btn-danger" href="{% url 'homemahal' id%}" style="text-decoration:none;">
+                                        Home
+                                </a>
+                                </div>
+                                <div class=" col-md-6 text-center mt-5  ">
+
+                                    <input type="submit" value="Create Order" class="btn btn-sm font-weight-bold btn-success">
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

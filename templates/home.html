@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel='stylesheet' href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="shortcut icon" type="image/png" href="/static/image/logo_cat.png">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'image/logo_cat.png' %}" width="30" height="30" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#ourservices">Our services <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#aboutus">About us <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='#clients'>Clients <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contactus">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      JoinUs
+                    </a>
+                    <script>
+                        $(document).ready(function() {
+                            $('.dropdown-toggle').dropdown();
+                        });
+                    </script>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'signupcust'%}"> Customer</a>
+                        <a class="dropdown-item" href="{% url 'signupmahal'%}">Mahal Manament</a>
+                        <a class="dropdown-item" href="{% url 'signupcat'%}">Catering service</a>
+                        <a class="dropdown-item" href="{% url 'signupcatboy'%}">Service Boys</a>
+                    </div>
+
+
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a name="" id="" class="" href="{% url 'login' %}" role="button"><span><i class="fas fa-unlock"></i>logIN</span></a>
+                <a name="signup" id="" class="btn btn-primary text-light mr-1" style='font-size:15px;' href="{% url 'signup' %}" role="button"><i class="fa fa-user-plus mr-1"></i>signUP</a>
+            </form>
+        </div>
+    </nav>
+    <section class='banner'>
+
+        <img src="{% static 'image/88.jpeg' %}">
+        <div class='content'>
+            <h2 class='heading'>Food <span>doesnt have a religion.</span> It is a religion</h2><br><br>
+            <p class='text'>There are no more juggles like calling your friends for references or searching on Google to find the Caterers, They have been brought all together on the table of corner, that is “CATERING CORNER”. Give yourself a jump on Catering Corner;
+                We’re sure you’ll be our friend forever 🙂.</p>
+        </div>
+
+
+    </section>
+
+    <section class='service' id='ourservices'>
+        <h2 class='heading'>Our Services</h2>
+        <p class="text">Worried about the kind of menu you want? Are you unsure if one food catering option is enough to create your diverse needs? Sit back and relax. You have come to the right place. With your next event just around the corner, you simply have to select
+            the kind of dishes you are looking for and Catering Corner will do the rest. Enjoy with your family and friends as we bring you the best of buffet catering and other options. Intimate dinners, corporate events, or more, our expert team of
+            planners will bring you the most delectable cuisines with high-end, best catering services.
+        </p>
+        <div class="container">
+            <div class="servicebox">
+                <div>
+                    <img src="{% static 'image/bb.png' %}">
+                    <h2>Birthday Events</h2>
+                </div>
+            </div>
+
+            <div class="servicebox ">
+                <div>
+                    <img src="{% static 'image/wedding.png' %}">
+
+                    <h2>Wedding Catering</h2>
+                </div>
+            </div>
+            <div class="servicebox ">
+                <div><img src="{% static 'image/events1.png' %}">
+                    <h2>Other Events</h2>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="technology bg-info">
+        <div class='contentbox'>
+            <h2 class='heading'>Our services in India </h2>
+            <p class='text'>For over more than 1 year, we have been working with some Fantastic Caterers who delivered some Incredible & affordable best catering services. We created just simple bridge between you and Creative Caterer “The Catering Corner” and you got
+                the Boom on your event 🙂
+            </p>
+        </div>
+        <div class='imgbx'>
+            <img src="{% static 'image/indiapng.png' %}" height="350px" width="300px">
+        </div>
+
+
+    </section>
+
+    <section class="aboutus" id='aboutus'>
+        <div class='contentbx'>
+            <h1 class="heading">About Us</h1>
+            <p class='text'><br><br> You are going to Marry once, You are arranging hilarious surprise party for your Daughter or Brother or for love once, You are inviting your Clients on your Annual Corporate Party that needed to be Grand, Shouldn’t it? We understand
+                that these moments leave some limitless memories that lasts forever, and to make this happen together we formed “ CHIN2 CATERING MANAGEMENT” to connect you with best of the best.
+                <br><br> Beyond the world of your Network, Smart phones or eyes, there are some Stylist & World Class Caterers who could be the best fit for your event and never been in touch with you. Catering Corner is the place where you can reach
+                the best Caterers around you, Interact with them, Request for Quote for your events and choose which one best suit to your budget that too at no cost 😉
+                <br><br> There are no more juggles like calling your friends for references or searching on Google to find the Caterers, They have been brought all together on the table of corner, that is “CATERING CORNER” Happy Catering, Hurray 🙂 🙂
+            </p>
+
+
+        </div>
+
+        <div class="imgbx">
+            <img src="{% static 'image/102.jpeg' %}" height="917px" width="670px">
+        </div>
+    </section>
+
+
+    <section class="client" id='clients'>
+
+        <h2 class='heading'>Our Clients</h2>
+        <p class='text'> Enjoy with your family and friends as we bring you the best of buffet catering and other options. Intimate dinners, corporate events, or more, our expert team of planners will bring you the most delectable cuisines with high-end, best catering
+            services.
+        </p>
+        <script>
+            function onmove(str) {
+                document.getElementById('Result').innerHTML = str;
+            }
+        </script>
+        <div class="imgbx">
+            <img src="{% static 'image/ap.png' %}" onmouseover="onmove('Andra');">
+            <img src="{% static 'image/tamilnadu.png' %}" onmouseover="onmove('Tamil Nadu');">
+            <img src="{% static 'image/kerala.png' %}" onmouseover="onmove('Kerala');">
+            <img src="{% static 'image/karanataka.png'%}" onmouseover="onmove('Karanataka');">
+            <p class="font-weight-bold text-white lead" id="Result">Tamil Nadu</p>
+        </div>
+
+
+    </section>
+
+
+    <section class='contactus' id='contactus'>
+
+        <h2 class='heading'>Contact Us</h2>
+
+
+    </section>
+
+    <section class='contact'>
+        <div class="imgbx">
+            <img src="{% static 'image/101.jpeg' %}" height="734px" width="700px">
+        </div>
+        <script>
+            function feedback() {
+                document.getElementById('submit').innerHTML = 'Thanks For Submit';
+            }
+        </script>
+        <div class='form'>
+
+            <div class="form-group">
+
+                <input id="fname" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="firstname">
+
+            </div>
+
+            <div class="form-group">
+
+                <input type="email" class="form-control" name="" id="" aria-describedby="helpId" placeholder="email">
+
+            </div>
+
+            <div class="form-group">
+
+                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="mobileno">
+
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" name="" id="" placeholder="enter your commends here" rows="3"></textarea>
+            </div>
+            <button type="submit" onclick="feedback();" class="btn btn-primary">submit</button>
+            <p class="font-weight-bold  text-danger lead my-5" id="submit"></p>
+        </div>
+
+
+    </section>
+
+
+    <section class='testimonials'>
+        <h2 class='heading'> Reviews</h2>
+        <div class='container'>
+            <div class='contentbx'>
+                <div>
+                    <p>
+                        There are no more juggles like calling your friends for references or searching on Google to find the Caterers, They have been brought all together on the table of corner, that is “CATERING CORNER”. Give yourself a jump on Catering Corner; We’re sure
+                        you’ll be our friend forever 🙂.
+                        <br><br>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star-o border border-warning"></i>
+
+                    </p>
+
+                    <h3>Mukesh</h3>
+                </div>
+            </div>
+            <div class='contentbx'>
+                <div>
+                    <p>
+                        With your next event just around the corner, you simply have to select the kind of dishes you are looking for and Catering Corner will do the rest. Enjoy with your family and friends as we bring you the best of buffet catering and other options. Intimate
+                        dinners, corporate events, or more, our expert team of planners will bring you the most delectable cuisines with high-end, best catering services.
+                        <br><br>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star-half text-warning"></i>
+                    </p>
+                    <h3>Yuvaraj</h3>
+                </div>
+
+            </div>
+
+
+            <div class='contentbx'>
+                <div>
+                    <p>
+                        With your next event just around the corner, you simply have to select the kind of dishes you are looking for and Catering Corner will do the rest. Enjoy with your family and friends as we bring you the best of buffet catering and other options. Intimate
+                        dinners, corporate events, or more, our expert team of planners will bring you the most delectable cuisines with high-end, best catering services.
+                        <br><br>
+
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star-half text-warning"></i>
+                    </p>
+                    <h3>Kalai </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class='footer'>
+        <p class='text'> Design and Developed Our Team</p>
+        <ul>
+            <p>follow us on.</p>
+            <li>
+                <i class='fas fa-coffee'></i>
+            </li>
+
+            <li>
+                <i class='fas fa-lock'></i>
+            </li>
+
+            <li>
+                <i class='fas fa-key'></i>
+            </li>
+            <li>
+                <i class='fas fa-bus'></i>
+            </li>
+        </ul>
+    </section>
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

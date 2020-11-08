@@ -1,0 +1,161 @@
+{% extends "home_mahal/nav.html" %} {% block title %} Mahal | Catering {{object.name}} {% endblock title %} {% block nav_body %}
+
+<div class="container-fluid mahal_management rounded">
+
+    <div class="container">
+        <p class="display-3 text-light border-bottom border-light">View {{object.name}} Service</p>
+    </div>
+
+    {% if catering_gallery|length %}
+    <div class="container my-5  d-flex  bg bg-white text-danger rounded">
+        <p class="card-title "></p>
+        <div class="container-fluid mx-1 row">
+            {% for obj in catering_gallery %}
+            <div class="col-md-4 float-right my-4 " style='height:150px; width:40px; overflow:hidden;'>
+                {% if obj != '' %}
+                <img class="card-img rounded" src="{{obj}}" alt="prof">{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <p class="lead text-warning ">No Image Yet to upload</p>
+    </div>
+    {% endif %}
+    <div class="container my-5  d-flex  bg bg-white text-danger rounded">
+
+        <div class="container p-3 mx-4 row">
+            <div class="container">
+                <p class="display-4 text-dark rounded font-weight-bold"><span class=""> View Menu Type</span></p>
+                <table class="notify mb-5 text-danger table font-weight-bold table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Menu</th>
+                            <th>Food Type</th>
+                            <th>Price Per Plate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <th>Morning</th>
+                            <th>Veg</th>
+                            {% if mrng_veg_total %}
+                            <th>Rs.{{mrng_veg_total}} per Plate</th>
+                            {% else %}
+                            <th>Nil</th>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Afternoon</th>
+                            <th>Veg</th>
+                            {% if lunch_veg_total %}
+                            <th>Rs.{{lunch_veg_total}} per Plate</th>
+                            {% else %}
+                            <th>Nil</th>
+                            {% endif %}
+                        </tr>
+                        </tr>
+                        <tr>
+                            <th>Afternoon</th>
+                            <th>Non-Veg</th>
+                            {% if lunch_non_total %}
+                            <th>Rs.{{lunch_non_total}} per Plate</th>
+                            {% else %}
+                            <th>Nil</th>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Dinner</th>
+                            <th>Veg</th>
+                            {% if dinner_veg_total %}
+                            <th>Rs.{{dinner_veg_total}} per Plate</th>
+                            {% else %}
+                            <th>Nil</th>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Dinner</th>
+                            <th>Non-Veg</th>
+                            {% if dinner_non_total %}
+                            <th>Rs.{{dinner_non_total}} per Plate</th>
+                            {% else %}
+                            <th>Nil</th>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5  d-flex  bg bg-white text-danger rounded">
+
+        <div class="container p-3 mx-4 row">
+            <div class="col-md-5 float-right my-4 " style='height:200px; width:80px; overflow:hidden;'>
+                {% if object.prof_img != '' %}
+                <img class="card-img rounded" src="{{object.prof_img}}" alt="prof"> {% else %}
+                <img class="card-img" src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+            </div>
+            <div class="row my-2 col-7">
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-user "></i> 
+                        Service name:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.name}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-building"></i>
+                        Experience:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.experience}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-phone"></i>
+                        Manager Name:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.manager}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-envelope "></i> 
+                        Email:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.email}}</p>
+                </div>
+
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-address-book"></i>
+                        Address:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">{{object.address.street}},{{object.address.city}},{{object.address.pincode}}</p>
+                </div>
+                <div class=" col-md-6">
+                    <span class="border-bottom border-info"><i class="fas fa-address-book"></i>
+                        Contact number:<br>
+                    </span>
+                    <p class="font-weight-bold my-2">
+                        Mobile:{{object.contact.0}} Phone:{{object.contact.1}}
+                    </p>
+                </div>
+
+
+                <div class=" col-md-4 text-center mt-5">
+                    <a name="" id="" class="btn-sm text-light font-weight-bold btn-success" href="{% url 'homemahal' id %}" role="button" style="text-decoration:none;">
+                            Home
+                    </a>
+                </div>
+                {% if pass %}
+                <div class=" col-md-8 text-right mt-5">
+                    <a name="" id="" class="btn-sm text-light font-weight-bold btn-success" href="{% url 'bookcateringbymahal' id object.id %}" role="button" style="text-decoration:none;">
+                            Book
+                    </a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock nav_body %}

@@ -1,0 +1,59 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | Earnings {{total}} {% endblock title %} {% block nav_body%}
+<div class="banner">
+    <h1 class="display-3 text-white">Earnings Amount: {{total}}</h1>
+</div>
+<section class='banner' style="height: 600px;">
+    {% if empty %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr>
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Rating</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in complete %}
+
+            <tr>
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.venue.address}}</td>
+
+                <td>{{obj.rating}}/5</td>
+                <td class="text-danger">Rs.{{obj.amount}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td scope="row"></td>
+                <td></td>
+                <td></td>
+                <td>Total:</td>
+                <td>Rs.{{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <td colspan="6" class="text-center"> <a href="{% url 'homecatboy' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Back</a></td>
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <div class=" text-center alert alert-warinng display-4" role="alert">
+        <strong>No Orders Found!</strong>
+        <div class=" text-center container font-weight-bold">
+            <a href="{% url 'homecatboy' id %}" class="btn col-3 font-weight-bold btn-danger border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% endif%}
+</section>
+
+{%endblock%}

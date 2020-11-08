@@ -1,0 +1,285 @@
+{% extends 'home_customer/nav.html' %} {% block nav_body %}
+<div class="catering_boys container-fluid p-2 mt-5">
+    <div class="container">
+        <div class="container-fluid bg-light text-info my-5 " style="height:490px;border-radius: 2rem;">
+            <div class="row ">
+                <div class="col-md-3 mt-4 justify-content-center text-center profile-head ">
+                    <span class='mt-4'>
+                        {% if prof_img != '' %}
+                                <img id='onprof' class='rounded-circle' src="{{prof_img}}" width="150" height="180">
+                         {% else %}
+                         <i class="fas fa-user fa-10x bg-light rounded-circle border overflow-hidden" style="border-color:grey !important;color:grey !important;width: 150;height: 180;"></i>
+                        {% endif %}
+                        
+                    </span>
+                    <div class="container-fluid small overflow-auto">
+                        <ul class="mt-2 nav nav-tabs justify-content-center border-0">
+                            <li class="nav-item col-md-12">
+                                <a class="nav-link {{active.0}}" href="#det" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
+                                        Details
+                                    </a>
+                            </li>
+                            <li class="nav-item col-md-12">
+                                <a class="nav-link {{active.1}}" href="#edetails" data-toggle="tab">
+                                        Edit user Details
+                                    </a>
+                            </li>
+                            <li class="nav-item col-md-12">
+                                <a class="nav-link {{active.2}} " href="#mail" data-toggle="tab">
+                                        Change E-Mail ID
+                                    </a>
+                            </li>
+                            <li class="nav-item col-md-12">
+                                <a class="nav-link  {{active.3}}" href="#ph" data-toggle="tab">
+                                        Change Ph Number
+                                    </a>
+                            </li>
+                            <li class="nav-item col-md-12 ">
+                                <a class="nav-link {{active.4}" href="#pass" data-toggle="tab">
+                                        Change Password
+                                    </a>
+                            </li>
+                            <li class="nav-item col-md-12 ">
+                                <a class="nav-link {{active.5}}" href="#pic" data-toggle="tab">
+                                        Edit Profile picture
+                                    </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-md-8 my-5 justify-content-center ">
+                    <h1 class="display-4 border-bottom border-info text-center ">Customer Profile Editing</h1>
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane {{active.0}} bg-light" id="det" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="container p-3 mx-4">
+                                <div class="row">
+                                    <div class=" col-md-6 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-user "></i> 
+                                                Name:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{name}}</p>
+                                    </div>
+                                    <div class=" col-md-3 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-child"></i>
+                                                 Age:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{age}}</p>
+                                    </div>
+                                    <div class=" col-md-3 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-child"></i>
+                                                Gender:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{gender}}</p>
+                                    </div>
+                                    <div class=" col-md-6 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-envelope "></i> 
+                                                Email:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{email}}</p>
+                                    </div>
+                                    <div class=" col-md-6 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-phone"></i>
+                                                Phone:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{ph_numb}}</p>
+                                    </div>
+                                    <div class=" col-md-12 mt-2">
+                                        <span class="border-bottom border-info"><i class="fas fa-address-book"></i>
+                                                Address:<br>
+                                            </span>
+                                        <p class="font-weight-bold my-2">{{address.street}},{{address.city}},{{address.pincode}}</p>
+                                    </div>
+
+                                    <div class=" col-md-6 mt-5">
+                                        <a href="#edetails" data-toggle="tab" style="text-decoration:none;">
+                                            <span class="text-danger"><i class="fas fa-pencil-alt"></i> 
+                                                Edit
+                                                </span>
+                                        </a>
+
+                                    </div>
+                                    <div class=" col-md-4 text-center mt-5">
+                                        <a name="" id="" class="btn-sm text-light font-weight-bold btn-success" href="#" role="button" style="text-decoration:none;">
+                                                    Home
+                                            </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane {{active.1}}" id="edetails" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{% url 'editdetails' 'customer' id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="container my-5 row">
+                                    <div class="input-group col-md-4 border-bottom border-info my-2 mx-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="text" name="name" value="{{name}}" placeholder="Full Name" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                    <div class="input-group col-md-2 border-bottom border-info my-2 mx-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-child"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm border-0 bg-light text-info" type="number" name="age" value="{{age}}" placeholder="Age" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                    <div class="input-group col-md-4 border-0 small border-info ">
+
+                                        <div class="form-check radio-info col-md-6">
+                                            <input class="form-check-input my-2" type="radio" name="gender" value="Male" checked>
+                                            <label class="form-check-label my-1 small" for="exampleRadios1">
+                                                    <span class="input-group-text border-0 bg-light text-info small" id="my-addon"><i class="fas fa-mars">Male</i></span>
+                                                </label>
+                                        </div>
+                                        <div class="form-check col-md-6">
+                                            <input class="form-check-input my-2" type="radio" name="gender" value="Female" {{female}}>
+                                            <label class="form-check-label my-1" for="exampleRadios2">
+                                                    <span class="input-group-text border-0 bg-light text-info small" id="my-addon"><i class="fas fa-venus">Female</i></span>
+                                                </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container row my-2">
+                                    <div class="input-group col-md-4 border-bottom border-info my-2 mx-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-address-book"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="text" name="add" value="{{address.street}}" placeholder="Address" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                    <div class="input-group col-md-3 border-bottom border-info my-2 mx-1">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-city"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm border-0 bg-light text-info" type="text" name="city" value="{{address.city}}" placeholder="City" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                    <div class="input-group col-md-3 border-bottom border-info my-2 ">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-code"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm border-0 bg-light text-info" type="text" name="pincode" value="{{address.pincode}}" placeholder="pincode" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="container row col-md-10 my-2 text-center justify-content-center">
+                                    <input class="border-0 col-md-3 btn-sm text-light font-weight-bold my-4 mx-4 text-center justify-comtent-right btn-warning" style="text-decoration: none;border-radius:2em;" type="submit" value="Update">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane {{active.2}}" id="mail" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{% url 'editemail' 'customer' id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="container row my-4">
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2 my-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="email" name="email" value="{{email}}" placeholder="Email" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+
+
+                                </div>
+                                <div class="container row my-2">
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2 my-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="email" name="cemail" placeholder="confirm Email" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+                                <div class="container row col-md-10 my-2 text-center justify-content-center">
+                                    <input class="border-0 col-md-3 btn-sm text-light font-weight-bold my-4 mx-4 text-center justify-comtent-right btn-warning" style="text-decoration: none;border-radius:2em;" type="submit" value="Update">
+                                </div>
+                                <div class="col-md-10 my-2">
+                                    <p class="text-danger text-center font-weight-bold">{{msg.email}}</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane {{active.3}}" id="ph" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{% url 'editcontact' 'customer' id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="container row my-5">
+
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2 my-5">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="number" name="phone" value="{{ph_numb}}" placeholder="Enter Phone Number" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+
+                                <div class="container row col-md-10 my-2 text-center justify-content-center">
+                                    <input class="border-0 col-md-3 btn-sm text-light font-weight-bold my-4 mx-4 text-center justify-comtent-right btn-warning" style="text-decoration: none;border-radius:2em;" type="submit" value="Update">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane {{active.4}}" id="pass" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{% url 'editpassword' 'customer' id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="container row my-1">
+                                    <p>Enter Old Password:</p><br>
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2 ">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="Password" name="opass" placeholder="Old Password" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+                                <div class="container row mt-1">
+                                    <p>Enter new Password:</p><br>
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="password" name="pass" placeholder="New Password" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+                                <div class="container row mt-1">
+                                    <p>Enter Confirm Password:</p><br>
+                                    <div class="input-group col-md-10 border-bottom border-info mx-2">
+                                        <div class="input-group-prepend text-center">
+                                            <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input class="form-control form-control border-0 bg-light text-info" type="password" name="cpass" placeholder="Confirm Password" aria-label="Recipient's " aria-describedby="my-addon">
+                                    </div>
+                                </div>
+
+                                <div class="container row col-md-10 mt-2 text-center justify-content-center">
+                                    <input class="border-0 col-md-3 btn-sm text-light font-weight-bold my-4 mx-4 text-center justify-comtent-right btn-warning" style="text-decoration: none;border-radius:2em;" type="submit" value="Update">
+                                </div>
+                                <div class="col-md-10 ">
+                                    <p class="text-danger text-center font-weight-bold">{{msg.password}}</p>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="tab-pane {{active.5}}" id="pic" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{% url 'editpicture' 'customer' id %}" enctype="multipart/form-data" method="POST">
+                                {% csrf_token %}
+                                <div class="container justify-content-center my-4 row">
+                                    <div class="color-light bg-light profile-img text-center">
+                                        <img id="blah" src="{{prof_img}}" onerror="standby() " alt="your image " />
+                                        <div class="file btn btn-sm btn-primary ">
+                                            Add/Change
+                                            <input type="file" onchange="readURL(this);" value="" name='image' accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container row col-md-* my-2 text-center justify-content-center">
+                                    <input class="border-0 col-md-3 btn-sm text-light font-weight-bold my-4 mx-4 text-center justify-comtent-right btn-warning" style="text-decoration: none;border-radius:2em;" type="submit" value="Update">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

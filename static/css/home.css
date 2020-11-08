@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: -webkit-linear-gradient(#12222d, #3475ca);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+}
+
+.banner .content {
+    max-width: 750px;
+    position: relative;
+    text-align: center;
+}
+
+.heading {
+    color: #fff;
+    font-size: 60px;
+}
+
+.text {
+    color: white;
+    font-size: 18px;
+}
+
+.banner span {
+    color: yellowgreen;
+}
+
+.banner header {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+}
+
+.banner header .logo {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 24px;
+}
+
+.banner p .logo {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 24px;
+}
+
+.service {
+    background: -webkit-linear-gradient(#12222d 90%, #3f2ffc);
+    padding: 100px;
+    text-align: center;
+}
+
+.service .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.service .container .servicebox {
+    position: relative;
+    background: #fff;
+    width: 250px;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    margin-top: 60px;
+    display: wrap;
+}
+
+.service .container .servicebox img {
+    max-width: 150px;
+}
+
+.service .container .servicebox h2 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.technology {
+    background: #3f2ffc;
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -250px;
+    padding-top: 250px;
+    align-items: center;
+}
+
+.technology .contentbox {
+    max-width: 800px;
+}
+
+.technology .imgbx {
+    max-width: 400px;
+}
+
+.aboutus {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.aboutus .contentbx {
+    background: #162c3b;
+    padding: 100px;
+    width: 50%;
+}
+
+.aboutus .imgbx {
+    width: 50%;
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+}
+
+.client {
+    padding: 70px;
+    background: rgb(96, 96, 184);
+    text-align: center;
+}
+
+.banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+}
+
+.client .contentbx {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.client .imgbx {
+    flex-wrap: wrap;
+    margin-top: 70px;
+}
+
+.client .imgbx img {
+    max-width: 200px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.contactus {
+    background: #A3A9B4;
+    text-align: center;
+    padding: 30px;
+}
+
+.contact {
+    background: #A3A9B4;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contact .imgbx {
+    margin-left: -100px;
+    background-size: cover;
+    background-position: center;
+    width: 50%;
+    background-color: white;
+}
+
+.contact .form {
+    text-align: center;
+    max-width: 500px;
+    width: 50%;
+}
+
+.contact .form .form-group {
+    margin-bottom: 50px;
+}
+
+.contact .form .form-group input::placeholder {
+    color: white;
+}
+
+.contact .form .form-group input {
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.contact .form .form-group textarea {
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.testimonials {
+    padding: 100px;
+    position: relative;
+    background: -webkit-linear-gradient(#12222d 70%, black);
+    text-align: center;
+    margin-bottom: -300px;
+}
+
+.testimonials .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.testimonials .contentbx {
+    align-items: center;
+    text-align: justify;
+    padding: 30px;
+    background-color: white;
+    height: 400px;
+    width: 350px;
+    display: flex;
+}
+
+.testimonials .contentbx h3 {
+    text-align: right;
+    color: blue;
+}
+
+.footer {
+    background: black;
+    padding: 20px 100px;
+    width: 100%;
+    padding-top: 300px;
+    margin-top: -300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.footer ul li {
+    list-style: none;
+    padding: 6px;
+}
+
+.navbar {
+    background: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.navbar form a {
+    margin-left: 30px;
+    text-decoration: none;
+}
+
+.navbar form a:hover {
+    font-weight: bold;
+}
+
+.navbar-collapse ul li a:hover {
+    font-weight: bold;
+}
+
+.dropdown-menu a:hover {
+    font-weight: bold;
+}
+
+.testimonials .contentbx i {
+    color: white;
+}
+
+@media (max-width: 991px) {}

@@ -1,0 +1,357 @@
+{% extends "./nav.html" %} {% block title %}Catering Service | Food List {% endblock title %} {% block nav_body %}
+<div class="catering_service text-white bg bg-light " style="background-color: grey !important;">
+    <div class="border-bottom border-light mb-5">
+        <p class="display-3">Catering Service Food List</p>
+    </div>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+        
+        input[type=date]::-webkit-inner-spin-button,
+        input[type=date]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+        
+        input {
+            text-align: center;
+        }
+    </style>
+    <div class="" style=>
+        <div class="">
+            <table class="notify mb-5 table font-weight-bold table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th>Menu</th>
+                        <th>Food Type</th>
+                        <th>Price Per Plate</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th>Morning</th>
+                        <th>Veg</th>
+                        {% if mrng_veg_total %}
+                        <th>Rs.{{mrng_veg_total}} per Plate</th>
+                        {% else %}
+                        <th>Nil</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Afternoon</th>
+                        <th>Veg</th>
+                        {% if lunch_veg_total %}
+                        <th>Rs.{{lunch_veg_total}} per Plate</th>
+                        {% else %}
+                        <th>Nil</th>
+                        {% endif %}
+                    </tr>
+                    </tr>
+                    <tr>
+                        <th>Afternoon</th>
+                        <th>Non-Veg</th>
+                        {% if lunch_non_total %}
+                        <th>Rs.{{lunch_non_total}} per Plate</th>
+                        {% else %}
+                        <th>Nil</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Dinner</th>
+                        <th>Veg</th>
+                        {% if dinner_veg_total %}
+                        <th>Rs.{{dinner_veg_total}} per Plate</th>
+                        {% else %}
+                        <th>Nil</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Dinner</th>
+                        <th>Non-Veg</th>
+                        {% if dinner_non_total %}
+                        <th>Rs.{{dinner_non_total}} per Plate</th>
+                        {% else %}
+                        <th>Nil</th>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="" style=>
+        <div class="">
+            <table class="notify mb-5 table font-weight-bold table-striped">
+                <thead>
+                    <tr class="catering_service text-light font-weight-bold lead">
+                        <td colspan="5">
+                            BreakFast
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Sl. No.</th>
+                        <th>Food Name</th>
+                        <th>Count</th>
+                        <th>Price Per Count</th>
+                        <th>Add/Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="{% url 'addvegfoodmrng' id %}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <td>
+                                Veg
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="text" name="foodname">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-6" type="number" name="foodcount">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="number" name="foodprice">
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-sm btn-info col-5" value="Add">
+                            </td>
+                        </tr>
+                    </form>
+                    {% if mrng_veg|length %} {% for key, val in mrng_veg.items %}
+                    <tr class="bg-dark text-white">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{key}}</td>
+                        <td>{{val.1}}</td>
+                        <td>Rs.{{val.0}}</td>
+                        <td>
+                            <a href="{% url 'deletevegfoodmrng' id key %}" class="btn btn-sm text-white btn-danger col-5">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="3">Total Amount per Plate</th>
+                        <th>Rs.{{mrng_veg_total}} per Plate</th>
+                        <th></th>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">
+                            No Breakfast Add Yet
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+
+
+                <thead>
+                    <tr class="catering_service text-light font-weight-bold lead">
+                        <td colspan="5">
+                            Lunch
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Sl. No.</th>
+                        <th>Food Name</th>
+                        <th>Count</th>
+                        <th>Price Per Count</th>
+                        <th>Add/Delete</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <form action="{% url 'addvegfoodafn' id %}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <td>
+                                Veg
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="text" name="foodname">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-6" type="number" name="foodcount">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="number" name="foodprice">
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-sm btn-info col-5" value="Add">
+                            </td>
+                        </tr>
+                    </form>
+                    {% if lunch_veg|length %} {% for key, val in lunch_veg.items %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{key}}</td>
+                        <td>{{val.1}}</td>
+                        <td>Rs.{{val.0}}</td>
+                        <td>
+                            <a href="{% url 'deletevegfoodafn' id key %}" class="btn btn-sm text-white btn-danger col-5">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="bg-dark text-white">
+                        <th colspan="3">Total Amount per Plate</th>
+                        <th>Rs.{{lunch_veg_total}} per Plate</th>
+                        <th></th>
+                    </tr>
+                    {% endif %}
+                    <form action="{% url 'addnonfoodafn' id %}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <td>
+                                Non-Veg
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="text" name="foodname">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-6" type="number" name="foodcount">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="number" name="foodprice">
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-sm btn-info col-5" value="Add">
+                            </td>
+                        </tr>
+                    </form>
+                    {% if lunch_non|length %} {% for key, val in lunch_non.items %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{key}}</td>
+                        <td>{{val.1}}</td>
+                        <td>Rs.{{val.0}}</td>
+                        <td>
+                            <a href="{% url 'deletenonfoodafn' id key %}" class="btn btn-sm text-white btn-danger col-5">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="bg-dark text-white">
+                        <th colspan="3">Total Amount per Plate</th>
+                        <th>Rs.{{lunch_non_total}} per Plate</th>
+                        <th></th>
+                    </tr>
+                    {% endif %} {% if not lunch_veg|length and not lunch_non|length %}
+
+                    <tr>
+                        <td colspan="5">
+                            No Lunch Add Yet
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+
+                <thead>
+                    <tr class="catering_service text-light font-weight-bold lead">
+                        <td colspan="5">
+                            Dinner
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Sl. No.</th>
+                        <th>Food Name</th>
+                        <th>Count</th>
+                        <th>Price Per Count</th>
+                        <th>Add/Delete</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <form action="{% url 'addvegfoodnyt' id %}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <td>
+                                Veg
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="text" name="foodname">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-6" type="number" name="foodcount">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="number" name="foodprice">
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-sm btn-info col-5" value="Add">
+                            </td>
+                        </tr>
+                    </form>
+                    {% if dinner_veg|length %} {% for key, val in dinner_veg.items %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{key}}</td>
+                        <td>{{val.1}}</td>
+                        <td>Rs.{{val.0}}</td>
+                        <td>
+                            <a href="{% url 'deletevegfoodnyt' id key %}" class="btn btn-sm text-white btn-danger col-5">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="bg-dark text-white">
+                        <th colspan="3">Total Amount per Plate</th>
+                        <th>Rs.{{dinner_veg_total}} per Plate</th>
+                        <th></th>
+                    </tr>
+                    {% endif %}
+                    <form action="{% url 'addnonfoodnyt' id %}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <td>
+                                Non-Veg
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="text" name="foodname">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-6" type="number" name="foodcount">
+                            </td>
+                            <td>
+                                <input class="container form-control form-control-sm col-10" type="number" name="foodprice">
+                            </td>
+
+                            <td>
+                                <input type="submit" class="btn btn-sm btn-info col-5" value="Add">
+                            </td>
+                        </tr>
+                    </form>
+                    {% if dinner_non|length %} {% for key, val in dinner_non.items %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{key}}</td>
+                        <td>{{val.1}}</td>
+                        <td>Rs.{{val.0}}</td>
+                        <td>
+                            <a href="{% url 'deletenonfoodnyt' id key %}" class="btn btn-sm text-white btn-danger col-5">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="bg-dark text-white">
+                        <th colspan="3">Total Amount per Plate</th>
+                        <th>Rs.{{dinner_non_total}} per Plate</th>
+                        <th></th>
+                    </tr>
+                    {% endif %} {% if not dinner_veg|length and not dinner_non|length %}
+
+                    <tr>
+                        <td colspan="5">
+                            No Dinenr Food Add Yet
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock nav_body %}

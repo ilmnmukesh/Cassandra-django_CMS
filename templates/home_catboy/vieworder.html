@@ -1,0 +1,58 @@
+{% extends 'home_catboy/nav.html'%} {% block title %} CB | View Orders {{total}} {% endblock title %} {% block nav_body%}
+<div class="banner">
+    <h1 class="display-3 text-white">Order List</h1>
+</div>
+<section class='banner' style="height: 600px;">
+    {% if empty %}
+    <table class="table text-light font-weight-bold table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>OrderVenue</th>
+                <th>Date</th>
+                <th>Timing</th>
+                <th>Amount</th>
+                <th>Remaining Count</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in complete %}
+            <tr class="text-center">
+                <td scope="row">{{obj.venue.location}}</td>
+                <td>{{obj.date}}</td>
+                <td>{{obj.time}}</td>
+                <td>Rs. {{obj.amount}}</td>
+                <td>{{obj.catboy_max}} / {{obj.count}}</td>
+                {% if obj.count_empty %}
+                <td>
+                    <a class="btn btn-info font-weight-bold" href="{% url 'viewcatboyorderaccept' id obj.id %}">View</a>
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-success font-weight-bold" href="{% url 'viewcatboyorderlist' id obj.id %}">Accept Request</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            <tr>
+
+                <td colspan="6" class="text-center"> <a href="{% url 'homecatboy' id %}" class="btn btn-danger text-light font-weight-bold col-2 border-0 ">Back</a></td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    {% else %}
+    <div class=" text-center alert alert-warinng display-4" role="alert">
+        <strong>No Orders Found!</strong>
+        <div class=" text-center container font-weight-bold">
+            <a href="{% url 'homecatboy' id %}" class="btn col-3 font-weight-bold btn-danger border-0 float-center">Back</a>
+        </div>
+    </div>
+    {% endif%}
+
+</section>
+
+
+{%endblock%}

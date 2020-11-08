@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% load static%} {%block css%}
+<link rel="stylesheet" href="{% static 'css/pic_inputs.css'%}">
+<link rel="stylesheet" href="{% static 'css/home.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+<link rel="stylesheet" href="/static/css/home_catering.css"> {%endblock css%} {% block js%}
+<script src="{% static 'js/pics.js'%}"></script>
+<script src="{% static 'js/back.js'%}"></script>
+{%endblock js%}{% block body%} {%block nav%}
+<nav class="navbar navbar-expand-sm text-center float-center navbar-info bg-light text-info ">
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "><i class="fas fa-bars"></i></span>
+    </button>
+    <a class="navbar-brand font-weight-bold text-white" href="#">
+        <img style="width: 45px;height:45;" src="{% static 'image/logo_cat.png'%}">
+    </a>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active ">
+                <a class="nav-link font-weight-bold text-info " href="{% url 'home' %} ">Home <span class="sr-only ">(current)</span></a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+{% block nav_body%} {% endblock nav_body %}
+
+
+
+
+<section id="footer">
+    <div class="container">
+        <div class="row text-center text-xs-center text-sm-left text-md-left">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <h5>Quick links</h5>
+                <ul class="list-unstyled quick-links">
+                    <li><a href="{% url 'home' %}"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+            <ul class="list-unstyled list-inline social text-center">
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fas fa-user"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fas fa-copyright    "></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fas fa-users"></i></a></li>
+            </ul>
+        </div>
+        </hr>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                <p class="h6">&copy All right Reversed.
+                    <a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank"></a>
+                </p>
+            </div>
+            </hr>
+        </div>
+    </div>
+</section>
+
+{% endblock nav %} {% endblock body%}

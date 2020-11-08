@@ -1,0 +1,71 @@
+{% extends "./nav.html" %} {% block title %}Mahal| Customer {{rev.name}} {% endblock title %} {% block nav_body %}
+<div class="catering_service text-white bg bg-light " style="background-color: grey !important;">
+    <div class="border-bottom border-light mb-5">
+        <p class="display-3">Mahal Order List</p>
+    </div>
+    <div class="container bg-light text-dark row rounded">
+        <div class="col-4 mt-5">
+            <img src="{{rev.prof_img}}" width='150'>
+        </div>
+
+        <div class="col-6 my-5 row lead ">
+            <p class="col-6">Name:</p>
+            <p class="col-6">{{rev.name}}</p>
+            <p class="col-6">Address:</p>
+            <p class="col-6">{{rev.address.street}}, {{rev.address.city}}, {{rev.address.pincode}}</p>
+            <p class="col-6">Contact:</p>
+            <p class="col-6">{{rev.ph_numb}}</p>
+            <p class="col-6">Email:</p>
+            <p class="col-6">{{rev.email}}</p>
+        </div>
+
+        <div class="col-12 row border-top">
+            <p class="col-3 text-center my-3">Date: {{obj.from_date}} to {{obj.to_date}}</p>
+            <p class="col-3 text-center my-3">Rent Hour:{{obj.rent_hr}}</p>
+            <p class="col-3 text-center my-3">Rs: {{per}} per hour</p>
+            <p class="col-3 text-center my-3">Amount: Rs. {{obj.amount}}</p>
+        </div>
+        <div class="col-12 row  border-top text-center">
+
+            {% if obj.status == "pending" %}
+            <p class="col-4 my-3">
+                <a href="{% url 'statuscustomerorderbymahal' id obj.cid obj.from_date obj.to_date 'cancel' %}" class="btn btn-danger col-3">Cancel</a>
+            </p>
+            <p class="col-4 my-3">
+                <a href="{% url 'viewmahalorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-4 my-3">
+                <a href="{% url 'statuscustomerorderbymahal' id obj.cid obj.from_date obj.to_date 'accept' %}" class="btn btn-success">Accept<i class="fa fa-check" aria-hidden="true"></i></a>
+            </p>
+            {% elif obj.status == "cancel" %}
+            <p class="col-6 my-3">
+                <a href="{% url 'viewmahalorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-danger text-white col-4 disabled">Cancelled <i class="fas fa-times" aria-hidden="true"></i> </a>
+            </p>
+
+            {% elif obj.status == "complete" %}
+            <p class="col-6 my-3">
+                <a href="{% url 'viewmahalorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-success text-white col-4 disabled">Completed <i class="fas fa-check-double" aria-hidden="true"></i> </a>
+            </p>
+            {% else %}
+
+            <p class="col-6 my-3">
+                <a href="{% url 'viewmahalorder' id %}" class="btn btn-dark col-3">Back</a>
+            </p>
+            <p class="col-6 my-3">
+                <a class="btn btn-success text-white col-4 disabled">Accepted<i class="fas fa-check" aria-hidden="true"></i> </a>
+            </p>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock nav_body %}

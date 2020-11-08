@@ -1,0 +1,45 @@
+{% extends 'home_catering/nav.html' %} {% block title %}Catering Service | Gallery {% endblock title %} {% block nav_body %}
+<div class="catering_service text-white bg bg-light " style="background-color: grey !important;">
+
+    <div class="border-bottom border-light mb-5">
+        <p class="display-3">Service Display Images</p>
+    </div>
+
+    <div class="" style=" height:470px;">
+        {% for obj in gallery.gallery_pic %}
+        <div class=" justify-content-center col-md-5 float-left my-3 mx-3 rounded" style='height:200px; width:330px; overflow:hidden;'>
+            {% if obj is not defined %}
+            <img class="card-img" src="{{obj}}" alt="prof"> {% else %}
+            <img class="card-img " src="/static/image/logo_cat.png" alt="prof"> {% endif %}
+            <p class="card-img-overlay text-center text-light font-weight-bold ">
+                <badge class="rounded bg-dark">Image NAme{{obj|get_pos}}</badge>
+            </p>
+
+            <a href="{% url 'deletegallerycatering' id obj|get_pos %}" class="card-img-overlay font-weight-bold  text-danger align-items-end mt-5 d-flex justify-content-center"><i class="fas fa-trash-alt fa-1x  "></i></a>
+        </div>
+
+
+        {% endfor %} {% if gallery.gallery_pic|length|test_range %}
+
+
+        <div class="col-md-5 my-4 justify-content-center" style='height:200px; width:330px; overflow:hidden;'>
+            <form id='insertImage' action="{% url 'addgallerycatering' id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="image-upload my-4 mx-5 text-center">
+                    <label for="file-input">
+                    <i class="fas fa-plus-circle fa-10x" style="width: 100px; cursor:pointer;"></i>
+                    </label>
+                    <input id="file-input" name="imgs" type="file" onchange="document.getElementById('insertImage').submit();" style="display: none;" accept="image/*">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    <div class="text-center container border-top border-light mt-5">
+        <div class="container col-6 p-5">
+            <a href="{% url 'homecatering' id%}" class="btn btn-light text-danger col-4 my-5">Home</a>
+        </div>
+    </div>
+
+</div>
+{% endblock nav_body %}

@@ -1,0 +1,163 @@
+{%extends 'nav.html'%} {% block nav_body%}
+<form action="{% url 'signupcat'%}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="container my-5">
+        <div class="container-fluid bg-light mt-5" style="height:450px;border-radius: 2rem;">
+            <div class='text-center p-4'>
+                <h1 class="text-info display-4">Catering Service Registration</h1>
+                <hr class="bg-info">
+            </div>
+            <div class="container row">
+                <div class="container col-md-4  text-center">
+                    <!-- <img src="C:/Users/MuKEsH/Downloads/cust-logo.png" height="200px"> -->
+                    <!-- <span class="text-info mt-5"><i class="fas fa-user-plus fa-10x"></i></span> -->
+                    <div class="content center">
+
+                        <p class="text-info text-center font-weight-bold">
+                            Profile Picture
+                        </p>
+                        <div class="color-light bg-light profile-img text-center">
+                            <img id="blah" src="#" onerror="standby() " alt="your image " />
+                            <div class="file btn btn-sm btn-primary ">
+                                Add/Change
+                                <input type="file" name="image" value=None onchange="readURL(this);" class="hidden" accept="image/*" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-md-8">
+
+                    <div class="container row">
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required value="{{name}}" type="text" name="name" placeholder="Catering Name" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-child"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required type="number" value="{{experience}}" name="experience" placeholder="Experience" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                    </div>
+                    <div class="container row my-2">
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-tasks"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required value="{{manager}}" type="text" name="manager" placeholder="Catering Manager name" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required type="email" value="{{email}}" name="email" placeholder="Email" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+
+                    </div>
+                    <div class="container row">
+                        <div class="input-group col-md-4 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-address-book"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" type="text" name="add" value="{{add}}" placeholder="Address" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                        <div class="input-group col-md-3 border-bottom border-info mx-1">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-city"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" type="text" value="{{city}}" name="city" placeholder="City" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                        <div class="input-group col-md-3 border-bottom border-info ">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-code"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" type="number" value="{{pincode}}" name="pincode" placeholder="pincode" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                    </div>
+
+                    <div class="container row">
+                        <div class="input-group col-md-5 border-bottom border-info mx-2 my-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-phone"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required type="tel" value="{{phone}}" name="phone" placeholder="Phone Number" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                        <div class="input-group col-md-5 border-bottom border-info mx-2 my-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-mobile"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info" required type="tel" value="{{mobile}}" name="mobile" placeholder="Mobile Number" aria-label="Recipient's " aria-describedby="my-addon">
+                        </div>
+                    </div>
+                    <div class="container row">
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info pwd1" required type="password" name="password" placeholder="Password" aria-label="Recipient's " aria-describedby="my-addon">
+                            <span class="input-group-btn   mt-2 text-info fas fa-fw fa-eye-slash field_icon toggle-password1" toggle="#password-field">
+                    
+                            </span>
+                        </div>
+                        <div class="input-group col-md-5 border-bottom border-info mx-2">
+                            <div class="input-group-prepend text-center">
+                                <span class="input-group-text border-0 bg-light text-info" id="my-addon"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input class="form-control form-control-sm border-0 bg-light text-info pwd2" required type="password" name="cpassword" placeholder="Confirm Password" aria-label="Recipient's " aria-describedby="my-addon">
+                            <span class="input-group-btn   mt-2 text-info fas fa-fw fa-eye-slash field_icon toggle-password2" toggle="#password-field">
+                    
+                            </span>
+
+                        </div>
+                        <script>
+                            $("body").on('click', '.toggle-password1',
+                                function() {
+                                    $(this).toggleClass(" fa-eye-slash fa-eye");
+                                    var $pwd = $('.pwd1');
+                                    if ($pwd.attr('type') === 'password') {
+                                        $pwd.attr('type', 'text');
+                                    } else {
+                                        $pwd.attr('type', 'password');
+                                    }
+                                }
+                            );
+                            $("body").on('click', '.toggle-password2',
+                                function() {
+                                    $(this).toggleClass(" fa-eye-slash fa-eye");
+                                    var $pwd = $('.pwd2');
+                                    if ($pwd.attr('type') === 'password') {
+                                        $pwd.attr('type', 'text');
+                                    } else {
+                                        $pwd.attr('type', 'password');
+                                    }
+                                }
+                            );
+                        </script>
+
+
+                    </div>
+
+                    <div class="container row mt-2">
+
+                        <a class="col-md-4 btn-sm text-info font-weight-bold mt-4 mx-2 btn-link" href="{% url 'login'%}" style="text-decoration: none;">
+                                Already have an account
+                            </a>
+                        <a class="col-md-2 btn-sm text-light text-center font-weight-bold mt-4 mx-2 btn-danger" href="{% url 'signup'%}" style="text-decoration: none;border-radius:2em;">
+                                Back
+                            </a>
+                        <input class="offset-md-1 border-0 col-md-3 btn-sm text-light font-weight-bold mt-4 mx-4 text-center justify-comtent-right btn-success" style="text-decoration: none;border-radius:2em;" type="submit" value="create new Catering">
+
+                    </div>
+                    <div class="col-md-10 text-center font-weight-bold text-warning mt-2">
+                        <p>{{msg}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+{%endblock%}

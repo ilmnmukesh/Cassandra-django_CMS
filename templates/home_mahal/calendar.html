@@ -1,0 +1,123 @@
+{% extends "./nav.html" %} {% block title %} Mahal | Calendar {% endblock title %} {% block nav_body %}
+<div class="mahal_management">
+
+    <table class="mb-5 mahal_management table text-light font-weight-bold table-striped">
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Calendar</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Ordered By</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Amount</th>
+                <th>Rent Hour</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        {% if calendar|length %}
+        <tbody>
+            {% for obj in calendar %}
+            <tr>
+                <th>{{obj.booker_name}}</th>
+                <th>{{obj.from_date}}</th>
+                <th>{{obj.to_date}}</th>
+                <th>{{obj.amount}}</th>
+                <th>{{obj.rent_hr}}</th>
+                <th>{{obj.status}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <th colspan="6">No Date Yet Book</th>
+            </tr>
+        </tbody>
+        {% endif %}
+        <thead>
+            <tr>
+                <th colspan="6"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                function datechange() {
+                    document.getElementById('to').value = document.getElementById('from').value;
+                }
+            </script>
+            <form action="{% url 'mahalblockcalendar' id %}" method="POST">
+                {% csrf_token %}
+                <tr>
+                    <th>Book Date</th>
+                    <th colspan="2">
+                        <p class="form-inline text-center">
+                            From: <input id="from" name="from" style="text-align:center ;" class="form-control form-control-sm col-6" onchange="datechange();" type="date" value="{{cx|get_current_date}}">
+                        </p>
+                    </th>
+                    <th colspan="2">
+                        <p class="form-inline text-center">
+                            To: <input id="to" type="date" name="to" style="text-align:center ;" value="{{cx|get_current_date}}" class="form-control col-8 form-control-sm">
+                        </p>
+                    </th>
+                    <th colspan="2">
+                        <button type="submit" class="btn btn-dark text-light font-weight-bold">Submit</button>
+                    </th>
+                </tr>
+            </form>
+        </tbody>
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">Change Rent Amount</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <form method="POST" action="{% url 'mahalrentupdate' id %}">
+                {% csrf_token %}
+                <tr>
+                    <style>
+                        input[type=number]::-webkit-inner-spin-button,
+                        input[type=number]::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                        }
+                        
+                        input[type=date]::-webkit-inner-spin-button,
+                        input[type=date]::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                        }
+                    </style>
+                    <th>Rent Amount</th>
+                    <th colspan="4">
+                        <p class="form-inline text-center new">
+                            Amount: Rs. <input id="from" name="amt" class="form-control form-control-sm col-4" style="text-align:center ;" type="number" value="{{amt}}">
+                            <span class="col-4">per Hour</span>
+                        </p>
+                    </th>
+
+                    <th>
+                        <button type="submit" class="btn btn-dark text-light font-weight-bold">Submit</button>
+                    </th>
+                </tr>
+            </form>
+        </tbody>
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6"></th>
+            </tr>
+        </thead>
+        <thead class="text-warning display-4">
+            <tr>
+                <th colspan="6">
+                    <a href="{% url 'homemahal' id %}" class="btn btn-light text-danger border border-danger font-weight-bold col-3">Back</a>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+{% endblock %}
