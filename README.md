@@ -2,6 +2,7 @@
 Catering Management Service using Cassandra via Djanago
 
 Using this link to download and install Cassandra
+
 https://medium.com/@sushantgautam_930/simple-way-to-install-cassandra-in-windows-10-6497e93989e6
 
 Requirements:
@@ -22,7 +23,7 @@ In windows
     
         save this files
     
-      --then click host
+      --then run host
 
 Note:
       if cassandra install successfully, the project run without error
