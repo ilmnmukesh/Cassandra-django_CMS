@@ -12,5 +12,5 @@ while 1: #checking cassandra is running or not
         sleep(3)
         break
 
-Popen(['start', 'cmd', '/k', 'c:/cassandra/bin/cqlsh.py'], shell=True) # then run cassandra shell
+Popen(['start', 'cmd', '/k', '%CASSANDRA_HOME%/bin/cqlsh.py'], shell=True) # then run cassandra shell
 Popen(['start', 'cmd', '/k', 'workon dj & cd '+project_home+' & python manage.py runserver'], shell=True) #then run the django project
